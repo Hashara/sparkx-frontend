@@ -9,6 +9,9 @@ import PropTypes from 'prop-types';
 const RadioButtonComponent = (props) => {
     const [value, setValue] = useState('country level');
     const [values, setValues] = useState([{
+        label: 'overall',
+        value: 'overall'
+    },{
         label: 'country level',
         value: 'country level'
     },{
@@ -17,7 +20,7 @@ const RadioButtonComponent = (props) => {
     },{
         label: 'hospital level',
         value: 'hospital level'
-    }
+    },
     ])
 
     const handleChange = (event) => {

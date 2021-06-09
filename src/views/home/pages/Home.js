@@ -1,9 +1,8 @@
 import React from "react";
 import StatsCard from "../../../components/StatsCard";
 import { makeStyles } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
-import SignIn from "../../Auth/Signin";
+import SymptomCard from "../../../components/SymptomCard";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -25,7 +24,7 @@ const Home = () => {
                     <StatsCard/>
                 </Grid>
                 <Grid item xs={6}>
-                    <SignIn/>
+                    <SymptomCard/>
                 </Grid>
             </Grid>
         </div>
