@@ -1,5 +1,5 @@
 import React from "react";
-import StatsComponent from "../components/Stats";
+import StatsCard from "../../../components/StatsCard";
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
@@ -22,7 +22,7 @@ const Home = () => {
         <div className={classes.root}>
             <Grid container>
                 <Grid item xs={6}>
-                    <StatsComponent/>
+                    <StatsCard/>
                 </Grid>
                 <Grid item xs={6}>
                     <SignIn/>

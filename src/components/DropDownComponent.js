@@ -4,7 +4,9 @@ import InputLabel from '@material-ui/core/InputLabel';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
-import NativeSelect from '@material-ui/core/NativeSelect';
+import MenuItem from "@material-ui/core/MenuItem";
+import PropTypes from 'prop-types';
+
 
 const useStyles = makeStyles((theme) => ({
     formControl: {
@@ -16,7 +18,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const NativeSelects = ({children}) => {
+const DropDownComponent = (props) => {
     const classes = useStyles();
     const [state, setState] = React.useState({
         age: '',
@@ -34,25 +36,28 @@ const NativeSelects = ({children}) => {
     return (
         <div>
             <FormControl variant="outlined" className={classes.formControl}>
-                <InputLabel htmlFor="outlined-age-native-simple">Age</InputLabel>
+                <InputLabel htmlFor="outlined-age-native-simple">{props.label}</InputLabel>
                 <Select
                     native
                     value={state.age}
                     onChange={handleChange}
-                    label="Age"
+                    label= {props.label}
                     inputProps={{
                         name: 'age',
                         id: 'outlined-age-native-simple',
                     }}
                 >
-                    <option aria-label="None" value="" />
-                    <option value={10}>Ten</option>
-                    <option value={20}>Twenty</option>
-                    <option value={30}>Thirty</option>
+                    <MenuItem value={10}>Ten</MenuItem>
+                    <MenuItem value={20}>Twenty</MenuItem>
+                    <MenuItem value={30}>Thirty</MenuItem>
                 </Select>
             </FormControl>
         </div>
     );
 }
 
-export default NativeSelect;
+DropDownComponent.propTypes = {
+    label: PropTypes.string
+}
+
+export default DropDownComponent;
