@@ -1,8 +1,8 @@
 import React from "react";
-import StatsCard from "../../../components/StatsCard";
+import StatsCard from "../components/StatsCard";
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
-import SymptomCard from "../../../components/SymptomCard";
+import SymptomCard from "../components/SymptomCard";
 
 const useStyles = makeStyles((theme) => ({
     root: {

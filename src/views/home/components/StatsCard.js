@@ -3,11 +3,17 @@ import {makeStyles} from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Box from '@material-ui/core/Box';
-import DropDownComponent from './DropDownComponent'
+import DropDownComponent from '../../../components/DropDownComponent'
 import Grid from '@material-ui/core/Grid';
 import PropTypes from 'prop-types';
-import RadioButtonComponent from './RadioButtonComponent';
 import CalenderComponent from "./CalenderComponent";
+import FormLabel from "@material-ui/core/FormLabel";
+import RadioGroup from "@material-ui/core/RadioGroup";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import Radio from "@material-ui/core/Radio";
+import FormControl from "@material-ui/core/FormControl";
+import {selectLevelAction} from '../redux/actions/homeAction';
+import {useDispatch} from 'react-redux';
 
 const useStyles = makeStyles({
     root: {
@@ -23,6 +29,7 @@ const useStyles = makeStyles({
 
 const StatsCard = (props) => {
     const classes = useStyles();
+    const dispatch = useDispatch()
 
     const [stats, setStats] = useState({
         "newCases": 2,
@@ -30,21 +37,52 @@ const StatsCard = (props) => {
         "deaths": 1
     })
 
+    const [radioButtonValue, setRadioButtonValue] = useState('OVERALL');
+    const [values, setValues] = useState([{
+        label: 'overall',
+        value: 'OVERALL'
+    },{
+        label: 'country level',
+        value: 'COUNTRY'
+    },{
+        label: 'district level',
+        value: 'DISTRICT'
+    },{
+        label: 'hospital level',
+        value: 'HOSPITAL'
+    },
+    ])
+
+    const levelChange = (event) => {
+        setRadioButtonValue(event.target.value);
+        dispatch(selectLevelAction(event.target.value));
+    };
+
+
     return (
         <Box p={1} bgcolor="background.paper">
             <Card className={classes.root}  variant="outlined" >
                 <CardContent>
                     <h2>Covid 19 Stats</h2>
-                    <Grid container>
-                        <Grid item xs ={9}>
-                            <CalenderComponent />
+                    <form>
+                        <Grid container>
+                            <Grid item xs ={9}>
+                                <CalenderComponent />
+                            </Grid>
+                            <Grid item xs ={3}>
+                                <FormControl component="fieldset">
+                                    <FormLabel component="legend">{props.title}</FormLabel>
+                                    <RadioGroup aria-label="gender" name="gender1" value={radioButtonValue} onChange={levelChange }>
+                                        {values.map((val)=>(
+                                            <FormControlLabel value={val.value} control={<Radio />} label={val.label} />
+                                        ))}
+                                    </RadioGroup>
+                                </FormControl>
+                                <DropDownComponent label={'Hospital'}/>
+                                <DropDownComponent label={'District'}/>
+                            </Grid>
                         </Grid>
-                        <Grid item xs ={3}>
-                            <RadioButtonComponent title={"Level"} />
-                            <DropDownComponent label={'Hospital'}/>
-                            <DropDownComponent label={'District'}/>
-                        </Grid>
-                    </Grid>
+                    </form>
                     <Box p={.5} bgcolor="background.paper">
 
                     <Grid container>
