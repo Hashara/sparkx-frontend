@@ -3,6 +3,7 @@ import StatsCard from "../components/StatsCard";
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import SymptomCard from "../components/SymptomCard";
+import DistrictDropDown from "../components/DistrictDropDown";
 
 const useStyles = makeStyles((theme) => ({
     root: {

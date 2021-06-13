@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const DropDownComponent = (props) => {
+const HospitalDropDown = (props) => {
     const classes = useStyles();
     const [state, setState] = React.useState({
         age: '',
@@ -55,8 +55,8 @@ const DropDownComponent = (props) => {
     );
 }
 
-DropDownComponent.propTypes = {
+HospitalDropDown.propTypes = {
     label: PropTypes.string
 }
 
-export default DropDownComponent;
+export default HospitalDropDown;

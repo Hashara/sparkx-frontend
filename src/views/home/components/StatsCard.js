@@ -3,7 +3,7 @@ import {makeStyles} from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Box from '@material-ui/core/Box';
-import DropDownComponent from '../../../components/DropDownComponent'
+import HospitalDropDown from './HospitalDropDown'
 import Grid from '@material-ui/core/Grid';
 import PropTypes from 'prop-types';
 import CalenderComponent from "./CalenderComponent";
@@ -12,8 +12,9 @@ import RadioGroup from "@material-ui/core/RadioGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Radio from "@material-ui/core/Radio";
 import FormControl from "@material-ui/core/FormControl";
-import {selectLevelAction} from '../redux/actions/homeAction';
+import {selectLevelAction} from '../redux/actions/homeActions';
 import {useDispatch} from 'react-redux';
+import DistrictDropDown from "./DistrictDropDown";
 
 const useStyles = makeStyles({
     root: {
@@ -78,8 +79,9 @@ const StatsCard = (props) => {
                                         ))}
                                     </RadioGroup>
                                 </FormControl>
-                                <DropDownComponent label={'Hospital'}/>
-                                <DropDownComponent label={'District'}/>
+                                <HospitalDropDown label={'Hospital'}/>
+                                <DistrictDropDown/>
+
                             </Grid>
                         </Grid>
                     </form>
