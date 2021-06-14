@@ -1,9 +1,16 @@
+import axios from "axios";
+
 import {
     SELECT_LEVEL,
     SELECT_DATE,
     SELECT_HOSPITAL,
-    SELECT_DISTRICT
+    SELECT_DISTRICT,
+    FETCH_COVID_STATS_REQUEST,
+    FETCH_COVID_STATS_SUCCESS,
+    FETCH_COVID_STATS_FAILURE
 } from './homeActionTypes';
+
+import {GET_COVID_STATS} from '../../../../endPoints';
 
 export const selectLevelAction = (level) => ({
     type: SELECT_LEVEL,
@@ -24,3 +31,43 @@ export const selectDistrictAction = (district) => ({
     type: SELECT_DISTRICT,
     payload: district
 });
+
+export const fetchCovidStatsRequest = () => {
+    return {
+        type: FETCH_COVID_STATS_REQUEST
+    }
+}
+
+export const fetchCovidStatsSuccess = (covidStats) => {
+    return {
+        type: FETCH_COVID_STATS_SUCCESS,
+        payload: covidStats
+    }
+}
+
+export const fetchCovidStatsFailure = (error) => {
+    return {
+        type: FETCH_COVID_STATS_FAILURE,
+        payload: error
+    }
+}
+
+
+export const fetchCovidStats = (val) => {
+    return (dispatch) => {
+        dispatch(fetchCovidStatsRequest, {params: {
+                level: val.level,
+                hospitalId: val.hospitalId,
+                district: val.district
+            }})
+        axios.get(GET_COVID_STATS)
+            .then(res => {
+                const covidStats = res.data;
+                dispatch(fetchCovidStatsSuccess(covidStats));
+            })
+            .catch(error => {
+                const errorMsg = error.message;
+                dispatch(fetchCovidStatsFailure(errorMsg))
+            })
+    }
+}

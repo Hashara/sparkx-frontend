@@ -13,7 +13,7 @@ import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Radio from "@material-ui/core/Radio";
 import FormControl from "@material-ui/core/FormControl";
 import {selectLevelAction} from '../redux/actions/homeActions';
-import {useDispatch} from 'react-redux';
+import {connect} from 'react-redux';
 import DistrictDropDown from "./DistrictDropDown";
 
 const useStyles = makeStyles({
@@ -28,9 +28,8 @@ const useStyles = makeStyles({
     },
 });
 
-const StatsCard = (props) => {
+const StatsCard = ({home, selectLevelAction}) => {
     const classes = useStyles();
-    const dispatch = useDispatch()
 
     const [stats, setStats] = useState({
         "newCases": 2,
@@ -42,13 +41,13 @@ const StatsCard = (props) => {
     const [values, setValues] = useState([{
         label: 'overall',
         value: 'OVERALL'
-    },{
+    }, {
         label: 'country level',
         value: 'COUNTRY'
-    },{
+    }, {
         label: 'district level',
         value: 'DISTRICT'
-    },{
+    }, {
         label: 'hospital level',
         value: 'HOSPITAL'
     },
@@ -56,71 +55,72 @@ const StatsCard = (props) => {
 
     const levelChange = (event) => {
         setRadioButtonValue(event.target.value);
-        dispatch(selectLevelAction(event.target.value));
+        selectLevelAction(event.target.value);
     };
 
 
     return (
         <Box p={1} bgcolor="background.paper">
-            <Card className={classes.root}  variant="outlined" >
+            <Card className={classes.root} variant="outlined">
                 <CardContent>
                     <h2>Covid 19 Stats</h2>
                     <form>
                         <Grid container>
-                            <Grid item xs ={9}>
-                                <CalenderComponent />
+                            <Grid item xs={9}>
+                                <CalenderComponent/>
                             </Grid>
-                            <Grid item xs ={3}>
+                            <Grid item xs={3}>
                                 <FormControl component="fieldset">
-                                    <FormLabel component="legend">{props.title}</FormLabel>
-                                    <RadioGroup aria-label="gender" name="gender1" value={radioButtonValue} onChange={levelChange }>
-                                        {values.map((val)=>(
-                                            <FormControlLabel value={val.value} control={<Radio />} label={val.label} />
+                                    <FormLabel component="legend">Level</FormLabel>
+                                    <RadioGroup aria-label="gender" name="gender1" value={radioButtonValue}
+                                                onChange={levelChange}>
+                                        {values.map((val) => (
+                                            <FormControlLabel value={val.value} control={<Radio/>} label={val.label}/>
                                         ))}
                                     </RadioGroup>
                                 </FormControl>
-                                <HospitalDropDown />
-                                <DistrictDropDown />
+                                <HospitalDropDown/>
+                                <DistrictDropDown/>
 
                             </Grid>
                         </Grid>
                     </form>
                     <Box p={.5} bgcolor="background.paper">
 
-                    <Grid container>
-                        <Grid item xs={4} >
-                            <Box m={.2}>
-                                <Card variant="outlined">
-                                    <CardContent>
-                                        <h4>Cases</h4>
-                                        <p>{stats.newCases}</p>
-                                    </CardContent>
-                                </Card>
-                            </Box>
-                        </Grid>
-                        <Grid item xs={4}>
-                            <Box m={.2}>
+                        <Grid container>
+                            <Grid item xs={4}>
+                                <Box m={.2}>
+                                    <Card variant="outlined">
+                                        <CardContent>
+                                            <h4>Cases</h4>
+                                            <p>{stats.newCases}</p>
+                                        </CardContent>
+                                    </Card>
+                                </Box>
+                            </Grid>
+                            <Grid item xs={4}>
+                                <Box m={.2}>
 
-                                <Card variant="outlined">
-                                    <CardContent>
-                                        <h4>Recovered</h4>
-                                        <p>{stats.recovered}</p>
-                                    </CardContent>
-                                </Card>
-                            </Box>
-                        </Grid>
-                        <Grid item xs={4}>
-                            <Box m={.2}>
+                                    <Card variant="outlined">
+                                        <CardContent>
+                                            <h4>Recovered</h4>
+                                            <p>{stats.recovered}</p>
+                                        </CardContent>
+                                    </Card>
+                                </Box>
+                            </Grid>
+                            <Grid item xs={4}>
+                                <Box m={.2}>
 
-                                <Card variant="outlined">
-                                    <CardContent>
-                                        <h4>Deaths</h4>
-                                        <p>{stats.deaths}</p>
-                                    </CardContent>
-                                </Card>
-                            </Box>
+                                    <Card variant="outlined">
+                                        <CardContent>
+                                            <h4>Deaths</h4>
+                                            <p>{stats.deaths}</p>
+                                        </CardContent>
+                                    </Card>
+                                </Box>
+                            </Grid>
                         </Grid>
-                    </Grid>
                     </Box>
 
                 </CardContent>
@@ -130,9 +130,24 @@ const StatsCard = (props) => {
     );
 }
 
+const mapStateToProps = state => {
+    return {
+        home: state.home,
+    }
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+        selectLevelAction: (level) => dispatch(selectLevelAction(level)),
+    }
+}
+
 StatsCard.propTypes = {
     newCases: PropTypes.string,
     recovered: PropTypes.string,
     deaths: PropTypes.string
 }
-export default StatsCard;
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(StatsCard);

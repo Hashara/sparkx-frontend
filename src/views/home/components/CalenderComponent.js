@@ -1,18 +1,15 @@
-import React, { useState } from "react";
+import React, {useState} from "react";
 import DateFnsUtils from '@date-io/date-fns';
-import { DatePicker,MuiPickersUtilsProvider  } from "@material-ui/pickers";
+import {DatePicker, MuiPickersUtilsProvider} from "@material-ui/pickers";
 import {selectDateAction} from '../redux/actions/homeActions';
-import {useDispatch} from 'react-redux';
+import {connect} from 'react-redux';
 
 
-const CalenderComponent = (props) => {
+const CalenderComponent = ({home, selectDateAction}) => {
     const [date, changeDate] = useState(new Date());
 
-    const dispatch = useDispatch()
-
-
     const handleChange = (val) => {
-        dispatch(selectDateAction(val));
+        selectDateAction(val);
     }
 
     let enable = false;
@@ -25,7 +22,7 @@ const CalenderComponent = (props) => {
                     orientation="landscape"
                     variant="static"
                     openTo="date"
-                    disableFuture = {true}
+                    disableFuture={true}
                     value={date}
                     onChange={val => {
                         changeDate(val);
@@ -37,4 +34,19 @@ const CalenderComponent = (props) => {
     );
 };
 
-export default CalenderComponent;
+const mapStateToProps = state => {
+    return {
+        home: state.home,
+    }
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+        selectDateAction: (date) => dispatch(selectDateAction(date)),
+    }
+}
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(CalenderComponent);
