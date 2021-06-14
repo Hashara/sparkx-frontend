@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
-import {fetchHospitals, selectHospitalAction} from "../../../redux";
+import {fetchCovidStats, fetchHospitals, selectHospitalAction} from "../../../redux";
 import {connect, useDispatch, useSelector} from "react-redux";
 import FormControl from "@material-ui/core/FormControl";
 import InputLabel from "@material-ui/core/InputLabel";
@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const HospitalDropDown = ({ hospitals, fetchHospitals, selectHospitalAction}) => {
+const HospitalDropDown = ({ home, hospitals, fetchHospitals, selectHospitalAction,fetchCovidStats}) => {
     const classes = useStyles();
 
     useEffect(() => {
@@ -31,6 +31,7 @@ const HospitalDropDown = ({ hospitals, fetchHospitals, selectHospitalAction}) =>
     const handleChange = (event) => {
         setHospitalVal(event.target.value);
         selectHospitalAction(event.target.value);
+        fetchCovidStats(home);
     };
 
     return hospitals.loading ? (
@@ -62,13 +63,15 @@ HospitalDropDown.propTypes = {
 const mapStateToProps = state => {
     return {
         hospitals: state.hospitals,
+        home: state.home
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return{
         fetchHospitals: () => dispatch(fetchHospitals()),
-        selectHospitalAction: (hospital) => dispatch(selectHospitalAction(hospital))
+        selectHospitalAction: (hospital) => dispatch(selectHospitalAction(hospital)),
+        fetchCovidStats: (val) => dispatch(fetchCovidStats(val))
     }
 }
 

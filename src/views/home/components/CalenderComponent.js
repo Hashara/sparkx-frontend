@@ -1,18 +1,18 @@
 import React, {useState} from "react";
 import DateFnsUtils from '@date-io/date-fns';
 import {DatePicker, MuiPickersUtilsProvider} from "@material-ui/pickers";
-import {selectDateAction} from '../redux/actions/homeActions';
+import {selectDateAction, fetchCovidStats} from '../redux/actions/homeActions';
 import {connect} from 'react-redux';
+import {formatDate} from '../../../util/Util'
 
 
-const CalenderComponent = ({home, selectDateAction}) => {
+const CalenderComponent = ({home, selectDateAction, fetchCovidStats}) => {
     const [date, changeDate] = useState(new Date());
 
     const handleChange = (val) => {
-        selectDateAction(val);
+        selectDateAction(formatDate(val));
+        fetchCovidStats(home);
     }
-
-    let enable = false;
 
     return (
         <>
@@ -43,6 +43,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         selectDateAction: (date) => dispatch(selectDateAction(date)),
+        fetchCovidStats: (val) => dispatch(fetchCovidStats(val))
     }
 }
 

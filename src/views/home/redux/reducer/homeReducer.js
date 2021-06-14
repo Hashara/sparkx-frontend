@@ -1,4 +1,5 @@
 import produce from "immer";
+import {formatDate} from "../../../../util/Util";
 
 import {
     SELECT_LEVEL,
@@ -14,7 +15,7 @@ let initialState = {
     level: 'OVERALL',
     hospital: '',
     district: '',
-    date: new Date(),
+    date: formatDate(new Date()),
     stats: {
         loading: false,
         covidStats: [],

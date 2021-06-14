@@ -55,12 +55,13 @@ export const fetchCovidStatsFailure = (error) => {
 
 export const fetchCovidStats = (val) => {
     return (dispatch) => {
-        dispatch(fetchCovidStatsRequest, {params: {
+        dispatch(fetchCovidStatsRequest)
+        axios.get(GET_COVID_STATS, {params: {
                 level: val.level,
                 hospitalId: val.hospitalId,
-                district: val.district
+                district: val.district,
+                date: val.date
             }})
-        axios.get(GET_COVID_STATS)
             .then(res => {
                 const covidStats = res.data;
                 dispatch(fetchCovidStatsSuccess(covidStats));

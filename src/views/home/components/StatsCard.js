@@ -12,7 +12,7 @@ import RadioGroup from "@material-ui/core/RadioGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Radio from "@material-ui/core/Radio";
 import FormControl from "@material-ui/core/FormControl";
-import {selectLevelAction} from '../redux/actions/homeActions';
+import {fetchCovidStats, selectLevelAction} from '../redux/actions/homeActions';
 import {connect} from 'react-redux';
 import DistrictDropDown from "./DistrictDropDown";
 
@@ -28,7 +28,7 @@ const useStyles = makeStyles({
     },
 });
 
-const StatsCard = ({home, selectLevelAction}) => {
+const StatsCard = ({home, selectLevelAction, fetchCovidStats}) => {
     const classes = useStyles();
 
     const [stats, setStats] = useState({
@@ -56,6 +56,7 @@ const StatsCard = ({home, selectLevelAction}) => {
     const levelChange = (event) => {
         setRadioButtonValue(event.target.value);
         selectLevelAction(event.target.value);
+        fetchCovidStats(home);
     };
 
 
@@ -139,6 +140,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         selectLevelAction: (level) => dispatch(selectLevelAction(level)),
+        fetchCovidStats: (val) => dispatch(fetchCovidStats(val))
     }
 }
 

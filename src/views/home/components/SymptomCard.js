@@ -5,7 +5,7 @@ import Box from "@material-ui/core/Box";
 import {makeStyles} from "@material-ui/core/styles";
 import {CardMedia} from "@material-ui/core";
 import symptoms from "../../../asserts/symptoms.jpg"
-import ButtonComponent from "../../../components/ButtonComponent";
+import ButtonComponent from "./ButtonComponent";
 import Grid from "@material-ui/core/Grid";
 import '../../../index.css';
 
