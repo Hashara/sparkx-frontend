@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import DateFnsUtils from '@date-io/date-fns';
 import { DatePicker,MuiPickersUtilsProvider  } from "@material-ui/pickers";
-import {selectDateAction} from '../redux/actions/homeAction';
+import {selectDateAction} from '../redux/actions/homeActions';
 import {useDispatch} from 'react-redux';
 
 

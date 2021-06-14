@@ -3,7 +3,7 @@ import {
     SELECT_DATE,
     SELECT_HOSPITAL,
     SELECT_DISTRICT
-} from './actionType';
+} from './homeActionTypes';
 
 export const selectLevelAction = (level) => ({
     type: SELECT_LEVEL,

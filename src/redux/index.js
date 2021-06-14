@@ -1,1 +1,3 @@
-export {selectLevelAction, selectDateAction, selectHospitalAction, selectDistrictAction} from '../views/home/redux/actions/homeAction'
+export * from '../views/home/redux/actions/homeActions';
+export * from '../views/home/redux/actions/districtActions';
+export * from '../views/home/redux/actions/hospitalActions';

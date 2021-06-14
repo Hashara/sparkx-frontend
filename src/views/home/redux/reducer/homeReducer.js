@@ -5,7 +5,7 @@ import {
     SELECT_DATE,
     SELECT_HOSPITAL,
     SELECT_DISTRICT
-} from '../actions/actionType';
+} from '../actions/homeActionTypes';
 
 let initialState = {
     level: 'OVERALL',
