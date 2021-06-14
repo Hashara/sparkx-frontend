@@ -31,12 +31,6 @@ const useStyles = makeStyles({
 const StatsCard = ({home, selectLevelAction, fetchCovidStats}) => {
     const classes = useStyles();
 
-    const [stats, setStats] = useState({
-        "newCases": 2,
-        "recovered": 0,
-        "deaths": 1
-    })
-
     const [radioButtonValue, setRadioButtonValue] = useState('OVERALL');
     const [values, setValues] = useState([{
         label: 'overall',
@@ -87,41 +81,44 @@ const StatsCard = ({home, selectLevelAction, fetchCovidStats}) => {
                         </Grid>
                     </form>
                     <Box p={.5} bgcolor="background.paper">
+                        {home.stats.covidStats.loading ? (
+                            <h1>Loading</h1>
+                        ) : (
+                            <Grid container>
+                                <Grid item xs={4}>
+                                    <Box m={.2}>
+                                        <Card variant="outlined">
+                                            <CardContent>
+                                                <h4>Cases</h4>
+                                                <p>{home.stats.covidStats.newCases}</p>
+                                            </CardContent>
+                                        </Card>
+                                    </Box>
+                                </Grid>
+                                <Grid item xs={4}>
+                                    <Box m={.2}>
 
-                        <Grid container>
-                            <Grid item xs={4}>
-                                <Box m={.2}>
-                                    <Card variant="outlined">
-                                        <CardContent>
-                                            <h4>Cases</h4>
-                                            <p>{stats.newCases}</p>
-                                        </CardContent>
-                                    </Card>
-                                </Box>
-                            </Grid>
-                            <Grid item xs={4}>
-                                <Box m={.2}>
+                                        <Card variant="outlined">
+                                            <CardContent>
+                                                <h4>Recovered</h4>
+                                                <p>{home.stats.covidStats.recovered}</p>
+                                            </CardContent>
+                                        </Card>
+                                    </Box>
+                                </Grid>
+                                <Grid item xs={4}>
+                                    <Box m={.2}>
 
-                                    <Card variant="outlined">
-                                        <CardContent>
-                                            <h4>Recovered</h4>
-                                            <p>{stats.recovered}</p>
-                                        </CardContent>
-                                    </Card>
-                                </Box>
+                                        <Card variant="outlined">
+                                            <CardContent>
+                                                <h4>Deaths</h4>
+                                                <p>{home.stats.covidStats.deaths}</p>
+                                            </CardContent>
+                                        </Card>
+                                    </Box>
+                                </Grid>
                             </Grid>
-                            <Grid item xs={4}>
-                                <Box m={.2}>
-
-                                    <Card variant="outlined">
-                                        <CardContent>
-                                            <h4>Deaths</h4>
-                                            <p>{stats.deaths}</p>
-                                        </CardContent>
-                                    </Card>
-                                </Box>
-                            </Grid>
-                        </Grid>
+                        )}
                     </Box>
 
                 </CardContent>
