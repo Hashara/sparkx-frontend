@@ -1,10 +1,12 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import InputLabel from '@material-ui/core/InputLabel';
-import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
-import MenuItem from "@material-ui/core/MenuItem";
 import PropTypes from 'prop-types';
+import {fetchHospitals, selectHospitalAction} from "../../../redux";
+import {connect, useDispatch, useSelector} from "react-redux";
+import FormControl from "@material-ui/core/FormControl";
+import InputLabel from "@material-ui/core/InputLabel";
+import Select from "@material-ui/core/Select";
+import MenuItem from "@material-ui/core/MenuItem";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -17,46 +19,61 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const HospitalDropDown = (props) => {
+const HospitalDropDown = ({ hospitals, fetchHospitals, selectHospitalAction}) => {
     const classes = useStyles();
-    const [state, setState] = React.useState({
-        age: '',
-        name: 'hai',
-    });
+
+    useEffect(() => {
+        fetchHospitals()
+    },[])
+
+    const [hospitalVal, setHospitalVal] = React.useState( );
 
     const handleChange = (event) => {
-        const name = event.target.name;
-        setState({
-            ...state,
-            [name]: event.target.value,
-        });
+        setHospitalVal(event.target.value);
+        selectHospitalAction(event.target.value);
     };
 
-    return (
-        <div>
-            <FormControl variant="outlined" className={classes.formControl}>
-                <InputLabel htmlFor="outlined-age-native-simple">{props.label}</InputLabel>
-                <Select
-                    native
-                    value={state.age}
-                    onChange={handleChange}
-                    label= {props.label}
-                    inputProps={{
-                        name: 'age',
-                        id: 'outlined-age-native-simple',
-                    }}
-                >
-                    <MenuItem value={10}>Ten</MenuItem>
-                    <MenuItem value={20}>Twenty</MenuItem>
-                    <MenuItem value={30}>Thirty</MenuItem>
-                </Select>
-            </FormControl>
-        </div>
-    );
+    return hospitals.loading ? (
+        <h1>Loading</h1>
+    ): hospitals.error ? (
+        <h1>Error</h1>
+    ) : (<div>
+        <FormControl variant="outlined" className={classes.formControl}>
+            <InputLabel htmlFor="outlined-age-native-simple">Hospitals</InputLabel>
+            <Select
+                value={hospitalVal}
+                onChange={handleChange}
+                label= {hospitalVal}
+                // disabled={true}
+            >
+                {hospitals.hospitals.map(hospital => {
+                    return <MenuItem value={hospital.hospitalId}>{hospital.name} - {hospital.district}</MenuItem>
+                })}
+            </Select>
+        </FormControl>
+    </div>)
 }
 
 HospitalDropDown.propTypes = {
-    label: PropTypes.string
+    label: PropTypes.string,
+    hospitals: PropTypes.array
 }
 
-export default HospitalDropDown;
+const mapStateToProps = state => {
+    return {
+        hospitals: state.hospitals,
+    }
+}
+
+const mapDispatchToProps = dispatch => {
+    return{
+        fetchHospitals: () => dispatch(fetchHospitals()),
+        selectHospitalAction: (hospital) => dispatch(selectHospitalAction(hospital))
+    }
+}
+
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(HospitalDropDown);

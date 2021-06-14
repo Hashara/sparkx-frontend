@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const DistrictDropDown = ({district, districts, fetchDistricts, selectDistrictAction}) => {
+const DistrictDropDown = ({ districts, fetchDistricts, selectDistrictAction}) => {
     const classes = useStyles();
 
 
@@ -68,14 +68,13 @@ DistrictDropDown.propTypes = {
 const mapStateToProps = state => {
     return {
         districts: state.districts,
-        district: state.home.district
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return{
         fetchDistricts: () => dispatch(fetchDistricts()),
-        selectDistrictAction: () => dispatch(selectDistrictAction())
+        selectDistrictAction: (district) => dispatch(selectDistrictAction(district))
     }
 }
 

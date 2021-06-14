@@ -79,8 +79,8 @@ const StatsCard = (props) => {
                                         ))}
                                     </RadioGroup>
                                 </FormControl>
-                                <HospitalDropDown label={'Hospital'}/>
-                                <DistrictDropDown/>
+                                <HospitalDropDown />
+                                <DistrictDropDown />
 
                             </Grid>
                         </Grid>
