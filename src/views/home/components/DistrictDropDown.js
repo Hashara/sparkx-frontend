@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
-import {fetchDistricts, selectDistrictAction} from "../../../redux";
+import {fetchCovidStats, fetchDistricts, selectDistrictAction} from "../../../redux";
 import {connect, useDispatch, useSelector} from "react-redux";
 import FormControl from "@material-ui/core/FormControl";
 import InputLabel from "@material-ui/core/InputLabel";
@@ -19,10 +19,8 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const DistrictDropDown = ({ districts, fetchDistricts, selectDistrictAction}) => {
+const DistrictDropDown = ({ home, districts, fetchDistricts, selectDistrictAction, fetchCovidStats}) => {
     const classes = useStyles();
-
-
 
     useEffect(() => {
         fetchDistricts()
@@ -34,6 +32,7 @@ const DistrictDropDown = ({ districts, fetchDistricts, selectDistrictAction}) =>
         console.log(event.target.value)
         setDistrictVal(event.target.value);
         selectDistrictAction(event.target.value);
+        fetchCovidStats(home);
     };
 
     return districts.loading ? (
@@ -49,9 +48,6 @@ const DistrictDropDown = ({ districts, fetchDistricts, selectDistrictAction}) =>
                     label= {districtVal}
                     // disabled={true}
                 >
-                    {/*<MenuItem value="">*/}
-                    {/*    <em>None</em>*/}
-                    {/*</MenuItem>*/}
                     {districts.districts.map(dis => {
                         return <MenuItem value={dis}>{dis}</MenuItem>
                     })}
@@ -68,13 +64,16 @@ DistrictDropDown.propTypes = {
 const mapStateToProps = state => {
     return {
         districts: state.districts,
+        home: state.home
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return{
         fetchDistricts: () => dispatch(fetchDistricts()),
-        selectDistrictAction: (district) => dispatch(selectDistrictAction(district))
+        selectDistrictAction: (district) => dispatch(selectDistrictAction(district)),
+        fetchCovidStats: (val) => dispatch(fetchCovidStats(val))
+
     }
 }
 
