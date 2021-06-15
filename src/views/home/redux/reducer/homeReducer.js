@@ -28,22 +28,6 @@ export default function homeReducer(state = initialState, action) {
         switch (action.type) {
             case SELECT_LEVEL:
                 draft.level = action.payload;
-                switch (action.payload){
-                    case 'OVERALL':
-                        draft.hospital = '';
-                        draft.district = '';
-                        break;
-                    case 'COUNTRY':
-                        draft.hospital = '';
-                        draft.district = '';
-                        break;
-                    case 'DISTRICT':
-                        draft.hospital = '';
-                        break;
-                    case 'HOSPITAL':
-                        draft.district = '';
-                        break;
-                }
                 break;
             case SELECT_DATE:
                 draft.date = action.payload;
