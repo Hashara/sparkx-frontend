@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import Box from "@material-ui/core/Box";
@@ -8,6 +8,7 @@ import symptoms from "../../../asserts/symptoms.jpg"
 import ButtonComponent from "./ButtonComponent";
 import Grid from "@material-ui/core/Grid";
 import '../../../index.css';
+import Button from "@material-ui/core/Button";
 
 const useStyles = makeStyles({
     root: {
@@ -30,7 +31,7 @@ const useStyles = makeStyles({
     },
 });
 
-const SymptomCard = (props) => {
+const SymptomCard = () => {
     const classes = useStyles();
 
     return(
@@ -38,7 +39,6 @@ const SymptomCard = (props) => {
             <Card className={classes.root}  variant="outlined" >
                 <CardContent>
                     <Grid container justify="center"  p={10}>
-
                         <h1>Having COVID-19 symptoms???</h1>
                     </Grid>
                 </CardContent>
@@ -56,7 +56,16 @@ const SymptomCard = (props) => {
                         </Grid>
                 </CardMedia>
                 <Grid container justify="center"  p={10}>
-                    <ButtonComponent text={'Register'}/>
+                    <Box m={2} pt={3}>
+                        <Button variant="contained" color="primary">
+                            Register
+                        </Button>
+                    </Box>
+                    <Box m={2} pt={3}>
+                        <Button variant="contained" color="primary">
+                            SIGN IN
+                        </Button>
+                    </Box>
                 </Grid>
             </Card>
         </Box>
