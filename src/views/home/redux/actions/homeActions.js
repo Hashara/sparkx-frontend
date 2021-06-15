@@ -53,14 +53,15 @@ export const fetchCovidStatsFailure = (error) => {
 }
 
 
-export const fetchCovidStats = (val) => {
-    return (dispatch) => {
+export const fetchCovidStats = () => {
+    return (dispatch, getState) => {
+        const state = getState()
         dispatch(fetchCovidStatsRequest)
         axios.get(GET_COVID_STATS, {params: {
-                level: val.level,
-                hospitalId: val.hospitalId,
-                district: val.district,
-                date: val.date
+                level: state.home.level,
+                hospitalId: state.home.hospitalId,
+                district: state.home.district,
+                date: state.home.date
             }})
             .then(res => {
                 const covidStats = res.data;
