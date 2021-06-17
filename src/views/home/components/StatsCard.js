@@ -18,9 +18,13 @@ import DistrictDropDown from "./DistrictDropDown";
 
 const useStyles = makeStyles({
     root: {
+        // display: 'flex',
+        // alignItems: 'center',
+        // justifyContent: 'center',
+        height: "100%",
+    },
+    card: {
         display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
     },
     title: {
         fontSize: 14,
@@ -33,7 +37,7 @@ const useStyles = makeStyles({
         "&:last-child": {
             paddingBottom: 0,
         }
-    }
+    },
 });
 
 const StatsCard = ({home, selectLevelAction, fetchCovidStats}) => {

@@ -18,8 +18,8 @@ const useStyles = makeStyles((theme) => ({
 const Home = () => {
     const classes = useStyles();
     return (
-        <div className={classes.root}>
-            <Grid container>
+        <div>
+            <Grid container >
                 <Grid item xs={6}>
                     <StatsCard/>
                 </Grid>
