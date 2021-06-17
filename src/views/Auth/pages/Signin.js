@@ -2,8 +2,6 @@ import React from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
 import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
@@ -12,6 +10,9 @@ import {makeStyles} from '@material-ui/core/styles';
 import {Card} from "@material-ui/core";
 import Box from "@material-ui/core/Box";
 import '../../../index.css';
+import {Formik} from 'formik';
+import * as Yup from 'yup';
+
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -33,6 +34,24 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
+const initialValues = {
+    email: '',
+    password: ''
+}
+
+const onSubmit = values => {
+    console.log('Form values', values)
+}
+
+const validationSchema = Yup.object({
+    email: Yup.string()
+        .email('Invalid email format')
+        .required('Required'),
+    password: Yup.string()
+        .min(8, 'Password should be of minimum 8 characters length')
+        .required('Required')
+})
+
 const SignIn = () => {
     const classes = useStyles();
 
@@ -47,49 +66,69 @@ const SignIn = () => {
                         <Typography component="h1" variant="h5">
                             Sign in
                         </Typography>
-                        <form className={classes.form} noValidate>
-                            <TextField
-                                variant="outlined"
-                                margin="normal"
-                                required
-                                fullWidth
-                                id="email"
-                                label="Email Address"
-                                name="email"
-                                autoComplete="email"
-                                autoFocus
-                            />
-                            <TextField
-                                variant="outlined"
-                                margin="normal"
-                                required
-                                fullWidth
-                                name="password"
-                                label="Password"
-                                type="password"
-                                id="password"
-                                autoComplete="current-password"
-                            />
-                            <Grid container justify="center" p={10}>
+                        <Formik
+                            initialValues={initialValues}
+                            onSubmit={onSubmit}
+                            validationSchema={validationSchema}
+                        >
+                            {formik => {
+                                return (
+                                    <form className={classes.form} onSubmit={formik.handleSubmit}>
+                                        <TextField
+                                            variant="outlined"
+                                            margin="normal"
+                                            required
+                                            fullWidth
+                                            id="email"
+                                            label="Email Address"
+                                            name="email"
+                                            autoComplete="email"
+                                            autoFocus
+                                            value={formik.values.email}
+                                            onChange={formik.handleChange}
+                                            onBlur={formik.handleBlur}
+                                            error={formik.touched.email && Boolean(formik.errors.email)}
+                                            helperText={formik.touched.email && formik.errors.email}
+                                        />
+                                        <TextField
+                                            variant="outlined"
+                                            margin="normal"
+                                            required
+                                            fullWidth
+                                            name="password"
+                                            label="Password"
+                                            type="password"
+                                            id="password"
+                                            autoComplete="current-password"
+                                            value={formik.values.password}
+                                            onChange={formik.handleChange}
+                                            onBlur={formik.handleBlur}
+                                            error={formik.touched.password && Boolean(formik.errors.password)}
+                                            helperText={formik.touched.password && formik.errors.password}
+                                        />
+                                        <Grid container justify="center" p={10}>
 
-                                <Button
-                                    type="submit"
-                                    // fullWidth
-                                    variant="contained"
-                                    color="primary"
-                                    className={classes.submit}
-                                >
-                                    Sign In
-                                </Button>
-                            </Grid>
-                            <Grid container justify="center" p={10}>
-                                <Grid item>
-                                    <Link href="#" variant="body2">
-                                        {"Don't have an account? Sign Up"}
-                                    </Link>
-                                </Grid>
-                            </Grid>
-                        </form>
+                                            <Button
+                                                type="submit"
+                                                // fullWidth
+                                                variant="contained"
+                                                color="primary"
+                                                className={classes.submit}
+                                            >
+                                                Sign In
+                                            </Button>
+                                        </Grid>
+                                        <Grid container justify="center" p={10}>
+                                            <Grid item>
+                                                <Link href="#" variant="body2">
+                                                    {"Don't have an account? Sign Up"}
+                                                </Link>
+                                            </Grid>
+                                        </Grid>
+                                    </form>
+                                )
+                            }}
+                        </Formik>
                     </div>
                 </Box>
             </Card>
