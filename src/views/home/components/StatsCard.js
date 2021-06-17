@@ -18,9 +18,6 @@ import DistrictDropDown from "./DistrictDropDown";
 
 const useStyles = makeStyles({
     root: {
-        // display: 'flex',
-        // alignItems: 'center',
-        // justifyContent: 'center',
         height: "100%",
     },
     card: {
