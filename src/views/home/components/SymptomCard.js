@@ -8,26 +8,15 @@ import symptoms from "../../../asserts/symptoms.jpg";
 import Grid from "@material-ui/core/Grid";
 import '../../../index.css';
 import Button from "@material-ui/core/Button";
-import {Link,withRouter} from 'react-router-dom';
+import {Link, withRouter} from 'react-router-dom';
 
 const useStyles = makeStyles({
     root: {
-        minWidth: 275,
         flexGrow: 1,
     },
-    bullet: {
-        display: 'inline-block',
-        margin: '0 2px',
-        transform: 'scale(0.8)',
-    },
-    title: {
-        fontSize: 14,
-    },
-    pos: {
-        marginBottom: 12,
-    },
-    textField: {
-        width: 200,
+    card: {
+        minWidth: 275,
+        flexGrow: 1,
     },
 });
 
@@ -38,7 +27,7 @@ const SymptomCard = () => {
         <Box p={1} bgcolor="background.paper">
             <Card className={classes.root} variant="outlined">
                 <CardContent>
-                    <Grid container justify="center" p={10}>
+                    <Grid container justify="center">
                         <h1>Having COVID-19 symptoms???</h1>
                     </Grid>
                 </CardContent>
@@ -56,13 +45,13 @@ const SymptomCard = () => {
                     </Grid>
                 </CardMedia>
                 <Grid container justify="center" p={10}>
-                    <Box m={2} pt={3}>
-                        <Button component={ Link } to="/register" variant="contained" color="primary">
+                    <Box m={2} pt={2.26}>
+                        <Button component={Link} to="/register" variant="contained" color="primary">
                             Register
                         </Button>
                     </Box>
-                    <Box m={2} pt={3}>
-                        <Button component={ Link } to="/signin"  variant="contained" color="primary">
+                    <Box m={2} pt={2.26}>
+                        <Button component={Link} to="/signin" variant="contained" color="primary">
                             SIGN IN
                         </Button>
                     </Box>
