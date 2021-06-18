@@ -3,9 +3,14 @@ import ReactDOM from "react-dom";
 import Routes from './Routes';
 import "./index.css";
 import reportWebVitals from "./reportWebVitals";
+import store from "./redux/store";
+import {Provider} from "react-redux";
 
-ReactDOM.render(<Routes />, document.getElementById('root'));
-
+ReactDOM.render(
+    <Provider store={store}>
+        <Routes/>
+    </Provider>,
+    document.getElementById('root'));
 
 
 // If you want to start measuring performance in your app, pass a function

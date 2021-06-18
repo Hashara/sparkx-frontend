@@ -12,7 +12,9 @@ import Box from "@material-ui/core/Box";
 import '../../../index.css';
 import {Formik} from 'formik';
 import * as Yup from 'yup';
-
+import {login} from "../redux/actions/AuthActions";
+import {connect} from 'react-redux';
+import Alert from '@material-ui/lab/Alert';
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -39,21 +41,22 @@ const initialValues = {
     password: ''
 }
 
-const onSubmit = values => {
-    console.log('Form values', values)
-}
 
 const validationSchema = Yup.object({
     email: Yup.string()
         .email('Invalid email format')
         .required('Required'),
     password: Yup.string()
-        .min(8, 'Password should be of minimum 8 characters length')
+        .min(6, 'Password should be of minimum 8 characters length')
         .required('Required')
 })
 
-const SignIn = () => {
+const SignIn = ({auth, login}) => {
     const classes = useStyles();
+
+    const onSubmit = values => {
+        login(values.email, values.password)
+    }
 
     return (
         <Box p={1} bgcolor="background.paper" className='vertical-horizontal'>
@@ -66,6 +69,11 @@ const SignIn = () => {
                         <Typography component="h1" variant="h5">
                             Sign in
                         </Typography>
+                        {auth.error ?
+                            <Alert severity="error">
+                                {auth.error.message}
+                            </Alert>:
+                            null}
                         <Formik
                             initialValues={initialValues}
                             onSubmit={onSubmit}
@@ -120,7 +128,7 @@ const SignIn = () => {
                                         </Grid>
                                         <Grid container justify="center" p={10}>
                                             <Grid item>
-                                                <Link href="#" variant="body2">
+                                                <Link href="/register" variant="body2">
                                                     {"Don't have an account? Sign Up"}
                                                 </Link>
                                             </Grid>
@@ -136,4 +144,19 @@ const SignIn = () => {
     );
 }
 
-export default SignIn;
+const mapStateToProps = state => {
+    return {
+        auth: state.auth,
+    }
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+        login: (email, password) => dispatch(login(email, password)),
+    }
+}
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(SignIn);;

@@ -6,3 +6,4 @@ export const GET_ALL_DISTRICTS = BACKEND + "public?cmd=GET_ALL_DISTRICTS";
 export const GET_ALL_HOSPITALS = BACKEND + "public?cmd=GET_ALL_HOSPITALS";
 
 export const GET_COVID_STATS = BACKEND + "public?cmd=GET_STATUS";
+export const POST_LOGIN_USER = BACKEND + "public?cmd=LOGIN";
