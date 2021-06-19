@@ -22,11 +22,13 @@ export default function AuthReducer(state = initialState, action) {
                 draft.loading = false;
                 draft.loggedIn = true;
                 draft.currentUser = action.payload;
+                draft.error = null;
                 break;
             case LOGIN_USER_ERROR:
                 draft.loading = false;
                 draft.loggedIn = false;
                 draft.error = action.payload;
+                draft.currentUser = null;
                 break;
             default:
                 break;

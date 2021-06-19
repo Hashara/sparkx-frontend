@@ -41,7 +41,7 @@ export const login = (email, password) => {
                 dispatch(loginUserSuccess(currentUser));
             })
             .catch(error => {
-                const errorMsg = error.message;
+                const errorMsg = error.response.data.message;
                 dispatch(loginUserError(errorMsg))
             })
     }
