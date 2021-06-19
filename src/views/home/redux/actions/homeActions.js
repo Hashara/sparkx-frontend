@@ -59,7 +59,7 @@ export const fetchCovidStats = () => {
         dispatch(fetchCovidStatsRequest)
         axios.get(GET_COVID_STATS, {params: {
                 level: state.home.level,
-                hospitalId: state.home.hospitalId,
+                hospitalId: state.home.hospital,
                 district: state.home.district,
                 date: state.home.date
             }})
