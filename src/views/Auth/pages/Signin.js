@@ -15,10 +15,11 @@ import * as Yup from 'yup';
 import {login} from "../redux/actions/AuthActions";
 import {connect} from 'react-redux';
 import Alert from '@material-ui/lab/Alert';
+import logo from "../../../asserts/logo.png";
 
 const useStyles = makeStyles((theme) => ({
     paper: {
-        marginTop: theme.spacing(8),
+        marginTop: theme.spacing(5),
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
@@ -47,7 +48,7 @@ const validationSchema = Yup.object({
         .email('Invalid email format')
         .required('Required'),
     password: Yup.string()
-        .min(6, 'Password should be of minimum 8 characters length')
+        .min(6, 'Password should be of minimum 6 characters length')
         .required('Required')
 })
 
@@ -63,9 +64,10 @@ const SignIn = ({auth, login}) => {
             <Card container variant="outlined">
                 <Box p={5}>
                     <div className={classes.paper}>
-                        <Avatar className={classes.avatar}>
-                            <LockOutlinedIcon/>
-                        </Avatar>
+                        {/*<Avatar className={classes.avatar}>*/}
+                        {/*    <LockOutlinedIcon/>*/}
+                        {/*</Avatar>*/}
+                        <img src={logo} alt="logo" className='logo' />
                         <Typography component="h1" variant="h5">
                             Sign in
                         </Typography>
