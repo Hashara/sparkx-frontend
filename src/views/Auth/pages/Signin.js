@@ -64,9 +64,6 @@ const SignIn = ({auth, login}) => {
             <Card container variant="outlined">
                 <Box p={5}>
                     <div className={classes.paper}>
-                        {/*<Avatar className={classes.avatar}>*/}
-                        {/*    <LockOutlinedIcon/>*/}
-                        {/*</Avatar>*/}
                         <img src={logo} alt="logo" className='logo' />
                         <Typography component="h1" variant="h5">
                             Sign in
