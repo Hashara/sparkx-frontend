@@ -1,25 +1,19 @@
 import React from "react";
 import {makeStyles} from '@material-ui/core/styles';
-import Layout from "../../core/Layout";
 import Box from "@material-ui/core/Box";
 import {Card} from "@material-ui/core";
 import register from "../../../asserts/register.png";
 import logo from "../../../asserts/logo.png";
 import Typography from "@material-ui/core/Typography";
-import Alert from "@material-ui/lab/Alert";
 import {Formik} from "formik";
 import TextField from "@material-ui/core/TextField";
 import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
-import Link from "@material-ui/core/Link";
-import StatsCard from "../../home/components/StatsCard";
 import * as Yup from "yup";
 import InputLabel from "@material-ui/core/InputLabel";
 import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
-import {MuiPickersUtilsProvider, KeyboardDatePicker} from "@material-ui/pickers";
-import DateFnsUtils from "@date-io/date-fns";
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -46,8 +40,8 @@ const initialValues = {
     email: '',
     password: '',
     confirm_password: '',
-    role:'',
-    hospital:''
+    role: '',
+    hospital: ''
 }
 
 const validationSchema = Yup.object({
