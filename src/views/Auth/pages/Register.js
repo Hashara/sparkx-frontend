@@ -1,18 +1,14 @@
 import React from "react";
 import {makeStyles} from '@material-ui/core/styles';
-import Layout from "../../core/Layout";
 import Box from "@material-ui/core/Box";
 import {Card} from "@material-ui/core";
 import register from "../../../asserts/register.png";
 import logo from "../../../asserts/logo.png";
 import Typography from "@material-ui/core/Typography";
-import Alert from "@material-ui/lab/Alert";
 import {Formik} from "formik";
 import TextField from "@material-ui/core/TextField";
 import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
-import Link from "@material-ui/core/Link";
-import StatsCard from "../../home/components/StatsCard";
 import * as Yup from "yup";
 import InputLabel from "@material-ui/core/InputLabel";
 import Select from "@material-ui/core/Select";
@@ -98,17 +94,12 @@ const Register = () => {
                             <Typography component="h1" variant="h5">
                                 Create your NCMS Account
                             </Typography>
-
-
                             <Formik
                                 initialValues={initialValues}
                                 onSubmit={onSubmit}
                                 validationSchema={validationSchema}>
 
                                 {formik => {
-                                    console.log(formik.values)
-                                    console.log(formik.errors)
-                                    console.log(formik.touched)
                                     return (
                                         <form className={classes.form} onSubmit={formik.handleSubmit}>
                                             <Grid container>

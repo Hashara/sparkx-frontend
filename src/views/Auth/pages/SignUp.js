@@ -41,16 +41,32 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const initialValues = {
+    first_name: '',
+    last_name: '',
     email: '',
-    password: ''
+    password: '',
+    confirm_password: '',
+    role:'',
+    hospital:''
 }
 
 const validationSchema = Yup.object({
+    first_name: Yup.string()
+        .required('Required'),
+    last_name: Yup.string()
+        .required('Required'),
     email: Yup.string()
         .email('Invalid email format')
         .required('Required'),
     password: Yup.string()
         .min(6, 'Password should be of minimum 6 characters length')
+        .required('Required'),
+    confirm_password: Yup.string()
+        .required('Required')
+        .oneOf([Yup.ref('password'), null], 'Passwords must match'),
+    role: Yup.string()
+        .required('Required'),
+    hospital: Yup.string()
         .required('Required')
 })
 
@@ -87,11 +103,9 @@ const SignUp = () => {
                                                         <TextField
                                                             variant="outlined"
                                                             margin="dense"
-                                                            required
                                                             id="first_name"
                                                             label="First Name"
                                                             name="first_name"
-                                                            autoFocus
                                                             value={formik.values.first_name}
                                                             onChange={formik.handleChange}
                                                             onBlur={formik.handleBlur}
@@ -104,11 +118,9 @@ const SignUp = () => {
                                                     <TextField
                                                         variant="outlined"
                                                         margin="dense"
-                                                        required
                                                         id="last_name"
                                                         label="Last Name"
                                                         name="last_name"
-                                                        autoFocus
                                                         value={formik.values.last_name}
                                                         onChange={formik.handleChange}
                                                         onBlur={formik.handleBlur}
@@ -120,13 +132,11 @@ const SignUp = () => {
                                             <TextField
                                                 variant="outlined"
                                                 margin="dense"
-                                                required
                                                 fullWidth
                                                 id="email"
                                                 label="Email Address"
                                                 name="email"
                                                 autoComplete="email"
-                                                autoFocus
                                                 value={formik.values.email}
                                                 onChange={formik.handleChange}
                                                 onBlur={formik.handleBlur}
@@ -139,7 +149,6 @@ const SignUp = () => {
                                                         <TextField
                                                             variant="outlined"
                                                             margin="dense"
-                                                            required
                                                             fullWidth
                                                             name="password"
                                                             label="Password"
@@ -158,7 +167,6 @@ const SignUp = () => {
                                                     <TextField
                                                         variant="outlined"
                                                         margin="dense"
-                                                        required
                                                         fullWidth
                                                         name="confirm_password"
                                                         label="Confirm Password"
@@ -180,14 +188,14 @@ const SignUp = () => {
                                                             variant="outlined"
                                                             className={classes.formControl}
                                                             margin="dense"
-                                                            name="role"
-                                                            id="role"
                                                         >
                                                             <InputLabel
                                                                 htmlFor="outlined-age-native-simple">
                                                                 Role
                                                             </InputLabel>
                                                             <Select
+                                                                name="role"
+                                                                id="role"
                                                                 value={formik.values.role}
                                                                 onChange={formik.handleChange}
                                                                 onBlur={formik.handleBlur}
@@ -206,14 +214,14 @@ const SignUp = () => {
                                                             variant="outlined"
                                                             className={classes.formControl}
                                                             margin="dense"
-                                                            name="hospital"
-                                                            id="hospital"
                                                         >
                                                             <InputLabel
                                                                 htmlFor="outlined-age-native-simple">
                                                                 Hospital
                                                             </InputLabel>
                                                             <Select
+                                                                name="hospital"
+                                                                id="hospital"
                                                                 value={formik.values.hospital}
                                                                 onChange={formik.handleChange}
                                                                 onBlur={formik.handleBlur}
