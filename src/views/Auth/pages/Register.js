@@ -18,8 +18,6 @@ import InputLabel from "@material-ui/core/InputLabel";
 import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
-import {MuiPickersUtilsProvider, KeyboardDatePicker} from "@material-ui/pickers";
-import DateFnsUtils from "@date-io/date-fns";
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -41,17 +39,44 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const initialValues = {
+    first_name: '',
+    last_name: '',
     email: '',
-    password: ''
+    contact: '',
+    password: '',
+    confirm_password: '',
+    gender: '',
+    district: '',
+    location_x: '',
+    location_y: ''
 }
+const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/
 
 const validationSchema = Yup.object({
+    first_name: Yup.string()
+        .required('Required'),
+    last_name: Yup.string()
+        .required('Required'),
     email: Yup.string()
         .email('Invalid email format')
         .required('Required'),
+    contact: Yup.string()
+        .required('Required')
+        .matches(phoneRegExp, 'Phone number is not valid'),
     password: Yup.string()
         .min(6, 'Password should be of minimum 6 characters length')
+        .required('Required'),
+    confirm_password: Yup.string()
         .required('Required')
+        .oneOf([Yup.ref('password'), null], 'Passwords must match'),
+    gender: Yup.string()
+        .required("Required"),
+    district: Yup.string()
+        .required("Required"),
+    location_x: Yup.string()
+        .required("Required"),
+    location_y: Yup.string()
+        .required("Required")
 })
 
 
@@ -61,6 +86,8 @@ const onSubmit = values => {
 
 const Register = () => {
     const classes = useStyles();
+
+
     return (
         <Box p={1} bgcolor="background.paper" className='register'>
             <Card container variant="outlined">
@@ -79,6 +106,8 @@ const Register = () => {
                                 validationSchema={validationSchema}>
 
                                 {formik => {
+                                     console.log(formik.values)
+                                    console.log(formik.errors)
                                     return (
                                         <form className={classes.form} onSubmit={formik.handleSubmit}>
                                             <Grid container>
@@ -87,7 +116,6 @@ const Register = () => {
                                                         <TextField
                                                             variant="outlined"
                                                             margin="dense"
-                                                            required
                                                             id="first_name"
                                                             label="First Name"
                                                             name="first_name"
@@ -104,7 +132,6 @@ const Register = () => {
                                                     <TextField
                                                         variant="outlined"
                                                         margin="dense"
-                                                        required
                                                         id="last_name"
                                                         label="Last Name"
                                                         name="last_name"
@@ -120,7 +147,6 @@ const Register = () => {
                                             <TextField
                                                 variant="outlined"
                                                 margin="dense"
-                                                required
                                                 fullWidth
                                                 id="email"
                                                 label="Email Address"
@@ -136,7 +162,6 @@ const Register = () => {
                                             <TextField
                                                 variant="outlined"
                                                 margin="dense"
-                                                required
                                                 fullWidth
                                                 id="contact"
                                                 label="Contact"
@@ -155,7 +180,6 @@ const Register = () => {
                                                         <TextField
                                                             variant="outlined"
                                                             margin="dense"
-                                                            required
                                                             fullWidth
                                                             name="password"
                                                             label="Password"
@@ -174,7 +198,6 @@ const Register = () => {
                                                     <TextField
                                                         variant="outlined"
                                                         margin="dense"
-                                                        required
                                                         fullWidth
                                                         name="confirm_password"
                                                         label="Confirm Password"
@@ -258,10 +281,11 @@ const Register = () => {
                                                         <TextField
                                                             variant="outlined"
                                                             margin="dense"
-                                                            required
                                                             id="location_x"
                                                             label="X"
                                                             name="location_x"
+                                                            type="number"
+                                                            inputProps={{min: "0", step: "1"}}
                                                             autoFocus
                                                             value={formik.values.location_x}
                                                             onChange={formik.handleChange}
@@ -279,8 +303,10 @@ const Register = () => {
                                                             margin="dense"
                                                             id="location_y"
                                                             label="Y"
+                                                            type="number"
                                                             name="location_y"
                                                             autoFocus
+                                                            inputProps={{min: "0", step: "1"}}
                                                             value={formik.values.location_y}
                                                             onChange={formik.handleChange}
                                                             onBlur={formik.handleBlur}
@@ -298,7 +324,7 @@ const Register = () => {
                                                     color="primary"
                                                     className={classes.submit}
                                                 >
-                                                   Register
+                                                    Register
                                                 </Button>
                                             </Grid>
                                         </form>
