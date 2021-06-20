@@ -222,14 +222,15 @@ const Register = () => {
                                                             variant="outlined"
                                                             className={classes.formControl}
                                                             margin="dense"
-                                                            name="gender"
-                                                            id="gender"
+
                                                         >
                                                             <InputLabel
                                                                 htmlFor="outlined-age-native-simple">
                                                                 Gender
                                                             </InputLabel>
                                                             <Select
+                                                                name="gender"
+                                                                id="gender"
                                                                 value={formik.values.gender}
                                                                 onChange={formik.handleChange}
                                                                 onBlur={formik.handleBlur}
