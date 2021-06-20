@@ -106,8 +106,9 @@ const Register = () => {
                                 validationSchema={validationSchema}>
 
                                 {formik => {
-                                     console.log(formik.values)
+                                    console.log(formik.values)
                                     console.log(formik.errors)
+                                    console.log(formik.touched)
                                     return (
                                         <form className={classes.form} onSubmit={formik.handleSubmit}>
                                             <Grid container>
@@ -119,7 +120,6 @@ const Register = () => {
                                                             id="first_name"
                                                             label="First Name"
                                                             name="first_name"
-                                                            autoFocus
                                                             value={formik.values.first_name}
                                                             onChange={formik.handleChange}
                                                             onBlur={formik.handleBlur}
@@ -135,7 +135,6 @@ const Register = () => {
                                                         id="last_name"
                                                         label="Last Name"
                                                         name="last_name"
-                                                        autoFocus
                                                         value={formik.values.last_name}
                                                         onChange={formik.handleChange}
                                                         onBlur={formik.handleBlur}
@@ -144,36 +143,40 @@ const Register = () => {
                                                     />
                                                 </Grid>
                                             </Grid>
-                                            <TextField
-                                                variant="outlined"
-                                                margin="dense"
-                                                fullWidth
-                                                id="email"
-                                                label="Email Address"
-                                                name="email"
-                                                autoComplete="email"
-                                                autoFocus
-                                                value={formik.values.email}
-                                                onChange={formik.handleChange}
-                                                onBlur={formik.handleBlur}
-                                                error={formik.touched.email && Boolean(formik.errors.email)}
-                                                helperText={formik.touched.email && formik.errors.email}
-                                            />
-                                            <TextField
-                                                variant="outlined"
-                                                margin="dense"
-                                                fullWidth
-                                                id="contact"
-                                                label="Contact"
-                                                name="contact"
-                                                autoComplete="contact"
-                                                autoFocus
-                                                value={formik.values.contact}
-                                                onChange={formik.handleChange}
-                                                onBlur={formik.handleBlur}
-                                                error={formik.touched.contact && Boolean(formik.errors.contact)}
-                                                helperText={formik.touched.contact && formik.errors.contact}
-                                            />
+                                            <Grid container>
+
+                                                <TextField
+                                                    variant="outlined"
+                                                    margin="dense"
+                                                    fullWidth
+                                                    id="email"
+                                                    label="Email Address"
+                                                    name="email"
+                                                    autoComplete="email"
+                                                    value={formik.values.email}
+                                                    onChange={formik.handleChange}
+                                                    onBlur={formik.handleBlur}
+                                                    error={formik.touched.email && Boolean(formik.errors.email)}
+                                                    helperText={formik.touched.email && formik.errors.email}
+                                                />
+                                            </Grid>
+                                            <Grid container>
+
+                                                <TextField
+                                                    variant="outlined"
+                                                    margin="dense"
+                                                    fullWidth
+                                                    id="contact"
+                                                    label="Contact"
+                                                    name="contact"
+                                                    autoComplete="contact"
+                                                    value={formik.values.contact}
+                                                    onChange={formik.handleChange}
+                                                    onBlur={formik.handleBlur}
+                                                    error={formik.touched.contact && Boolean(formik.errors.contact)}
+                                                    helperText={formik.touched.contact && formik.errors.contact}
+                                                />
+                                            </Grid>
                                             <Grid container>
                                                 <Grid item xs={6}>
                                                     <Box mr={1}>
@@ -266,7 +269,6 @@ const Register = () => {
                                                             id="district"
                                                             label="District"
                                                             name="district"
-                                                            autoFocus
                                                             value={formik.values.district}
                                                             onChange={formik.handleChange}
                                                             onBlur={formik.handleBlur}
@@ -286,7 +288,6 @@ const Register = () => {
                                                             name="location_x"
                                                             type="number"
                                                             inputProps={{min: "0", step: "1"}}
-                                                            autoFocus
                                                             value={formik.values.location_x}
                                                             onChange={formik.handleChange}
                                                             onBlur={formik.handleBlur}
@@ -305,7 +306,6 @@ const Register = () => {
                                                             label="Y"
                                                             type="number"
                                                             name="location_y"
-                                                            autoFocus
                                                             inputProps={{min: "0", step: "1"}}
                                                             value={formik.values.location_y}
                                                             onChange={formik.handleChange}
