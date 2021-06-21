@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import {makeStyles} from '@material-ui/core/styles';
 import Box from "@material-ui/core/Box";
 import {Card} from "@material-ui/core";
@@ -14,6 +14,9 @@ import InputLabel from "@material-ui/core/InputLabel";
 import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
+import {fetchHospitals, fetchRoleTypes, personRegister} from "../../../redux";
+import {connect} from "react-redux";
+
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -41,7 +44,7 @@ const initialValues = {
     password: '',
     confirm_password: '',
     role: '',
-    hospital: ''
+    hospitalId: ''
 }
 
 const validationSchema = Yup.object({
@@ -60,17 +63,25 @@ const validationSchema = Yup.object({
         .oneOf([Yup.ref('password'), null], 'Passwords must match'),
     role: Yup.string()
         .required('Required'),
-    hospital: Yup.string()
+    hospitalId: Yup.string()
         .required('Required')
 })
 
 
-const onSubmit = values => {
-    console.log(values)
-}
 
-const SignUp = () => {
+
+const SignUp = ({fetchHospitals, hospitals, fetchRoleTypes, roleTypes, personRegister}) => {
     const classes = useStyles();
+
+    useEffect(() => {
+        fetchHospitals();
+        fetchRoleTypes();
+    }, [])
+
+    const onSubmit = values => {
+        personRegister(values)
+    }
+
     return (
         <Box p={1} bgcolor="background.paper" className='register'>
             <Card container variant="outlined" className='vertical-horizontal-large'>
@@ -196,37 +207,38 @@ const SignUp = () => {
                                                                 error={formik.touched.role && Boolean(formik.errors.role)}
                                                                 helperText={formik.touched.role && formik.errors.role}
                                                             >
-                                                                <MenuItem value='male'>Male</MenuItem>
-                                                                <MenuItem value='female'>Female</MenuItem>
+                                                                {roleTypes.roleTypes.map(role => {
+                                                                    return <MenuItem value={role}>{role}</MenuItem>
+                                                                })}
                                                             </Select>
                                                         </FormControl>
                                                     </Box>
                                                 </Grid>
                                                 <Grid item xs={6}>
-                                                    <Box mr={1}>
                                                         <FormControl
                                                             variant="outlined"
                                                             className={classes.formControl}
                                                             margin="dense"
+                                                            fullWidth
                                                         >
                                                             <InputLabel
                                                                 htmlFor="outlined-age-native-simple">
                                                                 Hospital
                                                             </InputLabel>
                                                             <Select
-                                                                name="hospital"
-                                                                id="hospital"
-                                                                value={formik.values.hospital}
+                                                                name="hospitalId"
+                                                                id="hospitalId"
+                                                                value={formik.values.hospitalId}
                                                                 onChange={formik.handleChange}
                                                                 onBlur={formik.handleBlur}
-                                                                error={formik.touched.hospital && Boolean(formik.errors.hospital)}
-                                                                helperText={formik.touched.hospital && formik.errors.hospital}
+                                                                error={formik.touched.hospitalId && Boolean(formik.errors.hospitalId)}
+                                                                helperText={formik.touched.hospitalId && formik.errors.hospitalId}
                                                             >
-                                                                <MenuItem value='male'>Male</MenuItem>
-                                                                <MenuItem value='female'>Female</MenuItem>
+                                                                {hospitals.hospitals.map(hospital => {
+                                                                    return <MenuItem value={hospital.hospitalId}>{hospital.name} - {hospital.district}</MenuItem>
+                                                                })}
                                                             </Select>
                                                         </FormControl>
-                                                    </Box>
                                                 </Grid>
                                             </Grid>
                                             <Grid container justify="center" p={10}>
@@ -256,4 +268,22 @@ const SignUp = () => {
     );
 }
 
-export default SignUp;
+const mapStateToProps = state => {
+    return {
+        hospitals: state.hospitals,
+        roleTypes: state.roleTypes,
+    }
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+        fetchHospitals: () => dispatch(fetchHospitals()),
+        fetchRoleTypes: () => dispatch(fetchRoleTypes()),
+        personRegister: (values) => dispatch(personRegister(values))
+    }
+}
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(SignUp);

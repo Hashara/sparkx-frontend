@@ -10,7 +10,7 @@ import {
     PERSON_REGISTER_ERROR
 } from "./AuthActionTypes";
 import axios from "axios";
-import {POST_LOGIN_USER, POST_REGISTER_PATIENT} from "../../../../endPoints";
+import {POST_LOGIN_USER, POST_REGISTER_PATIENT, POST_REGISTER_PERSON} from "../../../../endPoints";
 
 export function loginUser(email, password) {
     return {
@@ -56,21 +56,21 @@ export const login = (email, password) => {
 
 export function patientRegisterRequest(values) {
     return {
-        type: LOGIN_USER_REQUEST,
+        type: PATIENT_REGISTER_REQUEST,
         values
     }
 }
 
 export function patientRegisterSuccess(currentUser) {
     return {
-        type: LOGIN_USER_SUCCESS,
+        type: PATIENT_REGISTER_SUCCESS,
         payload: {currentUser}
     }
 }
 
 export function patientRegisterError(message) {
     return {
-        type: LOGIN_USER_ERROR,
+        type: PATIENT_REGISTER_ERROR,
         payload: {message}
     }
 }
@@ -90,3 +90,43 @@ export const patientRegister = (values) => {
             })
     }
 }
+
+export function personRegisterRequest(values) {
+    return {
+        type: PERSON_REGISTER_REQUEST,
+        values
+    }
+}
+
+export function personRegisterSuccess(currentUser) {
+    return {
+        type: PERSON_REGISTER_SUCCESS,
+        payload: {currentUser}
+    }
+}
+
+export function personRegisterError(message) {
+    return {
+        type: PERSON_REGISTER_ERROR,
+        payload: {message}
+    }
+}
+
+export const personRegister = (values) => {
+    return (dispatch) => {
+        dispatch(personRegisterRequest(values))
+        axios.post(POST_REGISTER_PERSON, values
+        )
+            .then(res => {
+                const currentUser = res.data;
+                dispatch(personRegisterSuccess(currentUser));
+            })
+            .catch(error => {
+                const errorMsg = error.response.data.message;
+                dispatch(personRegisterError(errorMsg))
+            })
+    }
+}
+
+
+

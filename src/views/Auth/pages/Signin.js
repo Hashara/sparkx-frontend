@@ -10,7 +10,7 @@ import Box from "@material-ui/core/Box";
 import '../../../index.css';
 import {Formik} from 'formik';
 import * as Yup from 'yup';
-import {login} from "../redux/actions/AuthActions";
+import {login} from "../../../redux";
 import {connect} from 'react-redux';
 import Alert from '@material-ui/lab/Alert';
 import logo from "../../../asserts/logo.png";

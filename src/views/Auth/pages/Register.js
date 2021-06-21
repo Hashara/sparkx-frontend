@@ -88,7 +88,6 @@ const Register = ({districts, fetchDistricts, patientRegister}) => {
     },[])
 
     const onSubmit = values => {
-        console.log(values)
         patientRegister(values)
     }
 
