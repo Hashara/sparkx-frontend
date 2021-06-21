@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import {makeStyles} from '@material-ui/core/styles';
 import Box from "@material-ui/core/Box";
 import {Card} from "@material-ui/core";
@@ -14,6 +14,8 @@ import InputLabel from "@material-ui/core/InputLabel";
 import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
+import { fetchDistricts, patientRegister } from "../../../redux";
+import {connect} from "react-redux";
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -76,13 +78,19 @@ const validationSchema = Yup.object({
 })
 
 
-const onSubmit = values => {
-    console.log(values)
-}
 
-const Register = () => {
+
+const Register = ({districts, fetchDistricts, patientRegister}) => {
     const classes = useStyles();
 
+    useEffect(() => {
+        fetchDistricts()
+    },[])
+
+    const onSubmit = values => {
+        console.log(values)
+        patientRegister(values)
+    }
 
     return (
         <Box p={1} bgcolor="background.paper" className='register'>
@@ -213,7 +221,7 @@ const Register = () => {
                                                             variant="outlined"
                                                             className={classes.formControl}
                                                             margin="dense"
-
+                                                            fullWidth
                                                         >
                                                             <InputLabel
                                                                 htmlFor="outlined-age-native-simple">
@@ -255,18 +263,27 @@ const Register = () => {
                                             <Grid container>
                                                 <Grid item xs={6}>
                                                     <Box mr={1}>
-                                                        <TextField
+                                                        <FormControl
                                                             variant="outlined"
                                                             margin="dense"
-                                                            id="district"
                                                             label="District"
-                                                            name="district"
-                                                            value={formik.values.district}
-                                                            onChange={formik.handleChange}
-                                                            onBlur={formik.handleBlur}
-                                                            error={formik.touched.district && Boolean(formik.errors.district)}
-                                                            helperText={formik.touched.district && formik.errors.district}
-                                                        />
+                                                            fullWidth
+                                                        >
+                                                            <InputLabel htmlFor="outlined-age-native-simple">Districts</InputLabel>
+                                                            <Select
+                                                                id="district"
+                                                                name="district"
+                                                                value={formik.values.district}
+                                                                onChange={formik.handleChange}
+                                                                onBlur={formik.handleBlur}
+                                                                error={formik.touched.district && Boolean(formik.errors.district)}
+                                                                helperText={formik.touched.district && formik.errors.district}
+                                                            >
+                                                                {districts.districts.map(dis => {
+                                                                    return <MenuItem value={dis}>{dis}</MenuItem>
+                                                                })}
+                                                            </Select>
+                                                        </FormControl>
                                                     </Box>
                                                 </Grid>
                                                 <Grid item xs={3}>
@@ -335,4 +352,20 @@ const Register = () => {
     );
 }
 
-export default Register;
+const mapStateToProps = state => {
+    return {
+        districts: state.districts,
+    }
+}
+
+const mapDispatchToProps = dispatch => {
+    return{
+        fetchDistricts: () => dispatch(fetchDistricts()),
+        patientRegister: (values) => dispatch(patientRegister(values))
+    }
+}
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(Register);
