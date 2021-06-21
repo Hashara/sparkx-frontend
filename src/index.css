@@ -29,3 +29,37 @@ code {
   -webkit-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
 }
+
+
+.logo {
+  max-width: 40%;
+  height: auto;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+.register {
+  max-width: 60%;
+  height: auto;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+.small-logo {
+  max-width: 15%;
+  height: auto;
+  display: block;
+  alignment: left;
+}
+
+.vertical-horizontal-large {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
