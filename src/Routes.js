@@ -4,6 +4,8 @@ import App from './App';
 import SignIn from "./views/Auth/pages/Signin";
 import Register from "./views/Auth/pages/Register";
 import SignUp from "./views/Auth/pages/SignUp";
+import PrivateRoute from "./router/PrivateRoute";
+import MoHDashboard from "./views/dashboard/pages/MoHDashboard";
 
 const Routes = () =>{
     return(
@@ -13,6 +15,7 @@ const Routes = () =>{
                 <Route path= "/signin" exact component={SignIn}/>
                 <Route path= "/register" exact component={Register} />
                 <Route path= "/signup" exact component={SignUp} />
+                <PrivateRoute path="/dashboard" exact component={MoHDashboard} roles={["MoH"]}/>
             </Switch>
         </BrowserRouter>
     )
