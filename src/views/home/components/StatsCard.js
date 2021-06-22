@@ -15,6 +15,7 @@ import FormControl from "@material-ui/core/FormControl";
 import {fetchCovidStats, selectLevelAction} from '../redux/actions/homeActions';
 import {connect} from 'react-redux';
 import DistrictDropDown from "./DistrictDropDown";
+import ResultsComponent from "./ResultsComponent";
 
 const useStyles = makeStyles({
     root: {
@@ -95,51 +96,7 @@ const StatsCard = ({home, selectLevelAction, fetchCovidStats}) => {
                             </Grid>
                         </Grid>
                     </form>
-                    <Box p={.5} bgcolor="background.paper">
-                        {home.stats.covidStats.loading ? (
-                            <h1>Loading</h1>
-                        ) : (
-                            <Grid container>
-                                <Grid item xs={4}>
-                                    <Card variant="outlined">
-                                        <CardContent className={classes.cardContent}>
-                                            <Grid container justify="center">
-                                                <h4>Cases</h4>
-                                            </Grid>
-                                            <Grid container justify="center">
-                                                <h1>{home.stats.covidStats.newCases}</h1>
-                                            </Grid>
-                                        </CardContent>
-                                    </Card>
-                                </Grid>
-                                <Grid item xs={4}>
-                                    <Card variant="outlined">
-                                        <CardContent className={classes.cardContent}>
-                                            <Grid container justify="center">
-                                                <h4>Recovered</h4>
-                                            </Grid>
-                                            <Grid container justify="center">
-                                                <h1>{home.stats.covidStats.recovered}</h1>
-                                            </Grid>
-                                        </CardContent>
-                                    </Card>
-                                </Grid>
-                                <Grid item xs={4}>
-                                    <Card variant="outlined">
-                                        <CardContent className={classes.cardContent}>
-                                            <Grid container justify="center">
-                                                <h4>Deaths</h4>
-                                            </Grid>
-                                            <Grid container justify="center">
-                                                <h1>{home.stats.covidStats.deaths}</h1>
-                                            </Grid>
-                                        </CardContent>
-                                    </Card>
-                                </Grid>
-                            </Grid>
-                        )}
-                    </Box>
-
+                    <ResultsComponent/>
                 </CardContent>
             </Card>
         </Box>
