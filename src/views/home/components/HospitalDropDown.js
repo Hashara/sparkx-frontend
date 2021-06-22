@@ -45,7 +45,6 @@ const HospitalDropDown = ({ home, hospitals, fetchHospitals, selectHospitalActio
                 value={hospitalVal}
                 onChange={handleChange}
                 label= {hospitalVal}
-                // disabled={true}
             >
                 {hospitals.hospitals.map(hospital => {
                     return <MenuItem value={hospital.hospitalId}>{hospital.name} - {hospital.district}</MenuItem>
