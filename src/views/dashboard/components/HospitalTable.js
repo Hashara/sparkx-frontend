@@ -4,6 +4,10 @@ import {fetchHospitals} from "../../../redux";
 
 import {connect} from "react-redux";
 
+const onSubmit = (hospitalId) => {
+    console.log(hospitalId)
+}
+
 const HospitalTable = ({hospitals, fetchHospitals}) => {
     useEffect(() => {
         fetchHospitals()
@@ -11,11 +15,9 @@ const HospitalTable = ({hospitals, fetchHospitals}) => {
 
     const columns = ["hospitalId", "name", "district", "location_x", "location_y"]
 
-    // console.log(hospitals.hospitals)
     return (
-        // <p>Hello</p>
-        <TableComponent rows={hospitals.hospitals} columns={columns} excludes={["hospitalId"]} key={"hospitalId"}
-                        title={"Hospital"}/>
+        <TableComponent rows={hospitals.hospitals} columns={columns} excludes={["hospitalId"]} id={["hospitalId"]}
+                        title={"Hospital"} onSubmit={onSubmit} ButtonText = {"View More"}/>
 
     )
 }
@@ -31,6 +33,7 @@ const mapDispatchToProps = dispatch => {
         fetchHospitals: () => dispatch(fetchHospitals())
     }
 }
+
 export default connect(
     mapStateToProps,
     mapDispatchToProps
