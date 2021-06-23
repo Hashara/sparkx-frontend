@@ -66,24 +66,27 @@ export const fetchHospitals = () => {
     }
 }
 
-export const fetchHospitalById = () => {
-    return (dispatch, state) => {
+export const fetchHospitalById = (hospitalId) => {
+    return (dispatch, getState) => {
+        const state = getState()
+
         dispatch(fetchHospitalByIdRequest)
         axios.get(GET_HOSPITAL_BY_ID
             ,{
-            headers: {
-                'Authorization': 'Bearer ' + "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiJhN2M5ZmZhYy0yODU5LTQ2NDktOTY2MC01MzdhYjRiMjIxMTMiLCJpYXQiOjE2MjQ0MjM2NzIsImlzcyI6Ik5DTVMiLCJyb2xlIjoiTW9IIiwibmFtZSI6Im1vaCB1c2VyIiwiZXhwIjoxNjI0NDUzNjcyfQ.fIG1OJbF4Dgb-eprs6Pj2UIt6qGXRjA3d5mQjH_Xxb4"
-            }
+                params: {
+                    hospitalid: hospitalId,
+                },
+                headers: {
+                    'Authorization': 'Bearer ' + state.auth.currentUser.currentUser.jwt
+                }
         }
         )
             .then(res => {
                 const hospital = res.data;
-                console.log(hospital)
                 dispatch(fetchHospitalByIdSuccess(hospital));
             })
             .catch(error => {
                 const errorMsg = error.message;
-                console.log("hello")
                 dispatch(fetchHospitalByIdFailure(errorMsg));
             })
     }
