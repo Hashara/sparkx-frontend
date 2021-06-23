@@ -9,6 +9,10 @@ import PeopleIcon from '@material-ui/icons/People';
 import BarChartIcon from '@material-ui/icons/BarChart';
 import LayersIcon from '@material-ui/icons/Layers';
 import AssignmentIcon from '@material-ui/icons/Assignment';
+import LocalHospitalIcon from '@material-ui/icons/LocalHospital';
+import FiberNewIcon from '@material-ui/icons/FiberNew';
+import EqualizerIcon from '@material-ui/icons/Equalizer';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 
 export const mainListItems = (
     <div>
@@ -65,6 +69,41 @@ export const secondaryListItems = (
                 <AssignmentIcon />
             </ListItemIcon>
             <ListItemText primary="Year-end sale" />
+        </ListItem>
+    </div>
+);
+
+export const MoHListItems = (
+    <div>
+        <ListItem button>
+            <ListItemIcon>
+                <DashboardIcon />
+            </ListItemIcon>
+            <ListItemText primary="Dashboard" />
+        </ListItem>
+        <ListItem button>
+            <ListItemIcon>
+                < LocalHospitalIcon/>
+            </ListItemIcon>
+            <ListItemText primary="Hospitals" />
+        </ListItem>
+        <ListItem button>
+            <ListItemIcon>
+                <FiberNewIcon />
+            </ListItemIcon>
+            <ListItemText primary="New Hospital" />
+        </ListItem>
+        <ListItem button>
+            <ListItemIcon>
+                <EqualizerIcon />
+            </ListItemIcon>
+            <ListItemText primary="Statistics" />
+        </ListItem>
+        <ListItem button>
+            <ListItemIcon>
+                <ExitToAppIcon />
+            </ListItemIcon>
+            <ListItemText primary="Logout" />
         </ListItem>
     </div>
 );

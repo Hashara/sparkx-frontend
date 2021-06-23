@@ -7,6 +7,7 @@ import {makeStyles} from "@material-ui/core/styles";
 import HospitalTable from "../components/HospitalTable";
 import clsx from "clsx";
 import QueueCard from "../components/QueueCard";
+import {MoHListItems} from "../components/listItems";
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -27,7 +28,7 @@ const MoHDashboard = () => {
 
     return (
         <div>
-            <Dashboard>
+            <Dashboard menuListItems = {MoHListItems}>
                 <Grid item xs={12} md={8} lg={9}>
                     <Paper className={fixedHeightPaper}>
                         <HospitalTable/>
