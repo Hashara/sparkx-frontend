@@ -18,6 +18,8 @@ import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import MenuListItem from "./MenuListItems";
+
 
 const drawerWidth = 240;
 
@@ -100,7 +102,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const Dashboard = ({menuListItems, children}) => {
+const Dashboard = ({children}) => {
     const classes = useStyles();
     const [open, setOpen] = React.useState(true);
     const handleDrawerOpen = () => {
@@ -148,7 +150,9 @@ const Dashboard = ({menuListItems, children}) => {
                     </IconButton>
                 </div>
                 <Divider/>
-                <List>{menuListItems}</List>
+                <List>
+                    <MenuListItem/>
+                </List>
                 <Divider/>
                 {/*<List>{secondaryListItems}</List>*/}
             </Drawer>
