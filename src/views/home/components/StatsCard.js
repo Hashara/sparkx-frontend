@@ -78,7 +78,7 @@ const StatsCard = ({home, selectLevelAction, fetchCovidStats}) => {
                     <form>
                         <Grid container>
                             <Grid item xs={8}>
-                                <CalenderComponent/>
+                                <CalenderComponent isStatic={true}/>
                             </Grid>
                             <Grid item xs={4}>
                                 <FormControl component="fieldset">

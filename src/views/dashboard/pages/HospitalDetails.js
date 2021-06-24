@@ -10,10 +10,14 @@ import FormControl from "@material-ui/core/FormControl";
 import InputLabel from "@material-ui/core/InputLabel";
 import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
-import {fetchHospitalById, fetchHospitals} from "../../home/redux/actions/hospitalActions";
-import HospitalTable from "../components/HospitalTable";
-import QueueCard from "../components/QueueCard";
+import {
+    fetchHospitalById,
+    fetchHospitals,
+    fetchCovidStats,
+    selectHospitalAction, selectLevelAction
+} from "../../../redux";
 import PersonDetailsCard from "../components/PersonDetailCard";
+import CalenderComponent from "../../home/components/CalenderComponent";
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -27,13 +31,22 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const HospitalDetails = ({hospitals, fetchHospitals, fetchHospitalById}) => {
+const HospitalDetails = ({
+                             home,
+                             hospitals,
+                             fetchHospitals,
+                             fetchHospitalById,
+                             selectHospitalAction,
+                             fetchCovidStats,
+                             selectLevelAction
+                         }) => {
     const classes = useStyles();
 
     const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
 
     useEffect(() => {
         fetchHospitals()
+        selectLevelAction('HOSPITAL')
     }, [])
 
     const [hospitalVal, setHospitalVal] = React.useState();
@@ -41,35 +54,36 @@ const HospitalDetails = ({hospitals, fetchHospitals, fetchHospitalById}) => {
     const handleChange = (event) => {
         setHospitalVal(event.target.value);
         fetchHospitalById(event.target.value);
+        selectHospitalAction(event.target.value);
+        fetchCovidStats(home);
     };
 
     return (
         <Dashboard>
 
 
-
             <Grid item xs={12} md={8} lg={9}>
-                    <Typography component="h3" variant="h3">
-                        {(hospitals.selectedHospital === '') ?
-                            "select a hospital" : hospitals.selectedHospital.hospital.name + " - " +
-                            hospitals.selectedHospital.hospital.district
-                        }
-                    </Typography>
+                <Typography component="h3" variant="h3">
+                    {(hospitals.selectedHospital === '') ?
+                        "select a hospital" : hospitals.selectedHospital.hospital.name + " - " +
+                        hospitals.selectedHospital.hospital.district
+                    }
+                </Typography>
             </Grid>
             <Grid item xs={12} md={4} lg={3}>
-                    <FormControl variant="outlined" className={classes.formControl}>
-                        <InputLabel htmlFor="outlined-age-native-simple">Hospitals</InputLabel>
-                        <Select
-                            value={hospitalVal}
-                            onChange={handleChange}
-                            label={hospitalVal}
-                        >
-                            {hospitals.hospitals.map(hospital => {
-                                return <MenuItem
-                                    value={hospital.hospitalId}>{hospital.name} - {hospital.district}</MenuItem>
-                            })}
-                        </Select>
-                    </FormControl>
+                <FormControl variant="outlined" className={classes.formControl}>
+                    <InputLabel htmlFor="outlined-age-native-simple">Hospitals</InputLabel>
+                    <Select
+                        value={hospitalVal}
+                        onChange={handleChange}
+                        label={hospitalVal}
+                    >
+                        {hospitals.hospitals.map(hospital => {
+                            return <MenuItem
+                                value={hospital.hospitalId}>{hospital.name} - {hospital.district}</MenuItem>
+                        })}
+                    </Select>
+                </FormControl>
             </Grid>
             <Grid container>
 
@@ -85,13 +99,14 @@ const HospitalDetails = ({hospitals, fetchHospitals, fetchHospitalById}) => {
                 <Grid item xs={12} md={7} lg={8}>
                     <Paper className={fixedHeightPaper}>
 
-                        <Typography component="h2" variant="h5" color="primary" gutterBottom>
-                            Director Details
-                        </Typography>
-                        {(hospitals.selectedHospital === '') ?
-                            "select a hospital" :
-                            <PersonDetailsCard person={hospitals.selectedHospital.director}/>
-                        }
+                        {/*<Typography component="h2" variant="h5" color="primary" gutterBottom>*/}
+                        {/*    Director Details*/}
+                        {/*</Typography>*/}
+                        {/*{(hospitals.selectedHospital === '') ?*/}
+                        {/*    "select a hospital" :*/}
+                        {/*    <PersonDetailsCard person={hospitals.selectedHospital.director}/>*/}
+                        {/*}*/}
+                        <CalenderComponent isStatic={false}/>
                     </Paper>
                 </Grid>
             </Grid>
@@ -102,7 +117,8 @@ const HospitalDetails = ({hospitals, fetchHospitals, fetchHospitalById}) => {
 
 const mapStateToProps = state => {
     return {
-        hospitals: state.hospitals
+        hospitals: state.hospitals,
+        home: state.home,
     }
 }
 
@@ -110,7 +126,11 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         fetchHospitals: () => dispatch(fetchHospitals()),
-        fetchHospitalById: (hospitalId) => dispatch(fetchHospitalById(hospitalId))
+        fetchHospitalById: (hospitalId) => dispatch(fetchHospitalById(hospitalId)),
+        selectHospitalAction: (hospital) => dispatch(selectHospitalAction(hospital)),
+        fetchCovidStats: (val) => dispatch(fetchCovidStats(val)),
+        selectLevelAction: (level) => dispatch(selectLevelAction(level)),
+
     }
 }
 export default connect(
