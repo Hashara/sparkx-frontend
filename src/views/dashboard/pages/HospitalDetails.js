@@ -18,10 +18,13 @@ import {
 } from "../../../redux";
 import PersonDetailsCard from "../components/PersonDetailCard";
 import CalenderComponent from "../../home/components/CalenderComponent";
+import StatsChart from "../components/StatsChart";
+import Box from "@material-ui/core/Box";
 
 const useStyles = makeStyles((theme) => ({
     paper: {
         padding: theme.spacing(2),
+        margin: theme.spacing(1),
         display: 'flex',
         overflow: 'auto',
         flexDirection: 'column',
@@ -86,27 +89,48 @@ const HospitalDetails = ({
                 </FormControl>
             </Grid>
             <Grid container>
+                    <Grid item xs={12} md={4} lg={3}>
+                        <Paper className={fixedHeightPaper}>
+                            {(hospitals.selectedHospital === '') ?
+                                null : <HospitalBedChart bedData={hospitals.selectedHospital.beds}/>
+                            }
+                        </Paper>
+                    </Grid>
+
 
                 <Grid item xs={12} md={4} lg={3}>
-                    <Paper className={fixedHeightPaper}>
-                        {(hospitals.selectedHospital === '') ?
-                            null : <HospitalBedChart bedData={hospitals.selectedHospital.beds}/>
-                        }
+                <Paper className={fixedHeightPaper}>
+
+                            <Typography component="h2" variant="h5" color="primary" gutterBottom>
+                                Covid 19 statistic
+                            </Typography>
+                            {/*{(hospitals.selectedHospital === '') ?*/}
+                            {/*    "select a hospital" :*/}
+                            {/*    <PersonDetailsCard person={hospitals.selectedHospital.director}/>*/}
+                            {/*}*/}
+                            <Grid item xs={12} md={12} lg={9}>
+                            <CalenderComponent isStatic={false}/>
+                        </Grid>
+                        <Grid container>
+                            <Grid item xs={12} md={12} lg={12}>
+                                <StatsChart stats={home.stats.covidStats}/>
+                            </Grid>
+                        </Grid>
+
                     </Paper>
                 </Grid>
-                <Grid item xs={12} md={1} lg={1}>
-                </Grid>
-                <Grid item xs={12} md={7} lg={8}>
-                    <Paper className={fixedHeightPaper}>
 
-                        {/*<Typography component="h2" variant="h5" color="primary" gutterBottom>*/}
-                        {/*    Director Details*/}
-                        {/*</Typography>*/}
-                        {/*{(hospitals.selectedHospital === '') ?*/}
-                        {/*    "select a hospital" :*/}
-                        {/*    <PersonDetailsCard person={hospitals.selectedHospital.director}/>*/}
-                        {/*}*/}
-                        <CalenderComponent isStatic={false}/>
+                <Grid item xs={12} md={8} lg={6}>
+                    <Paper className={classes.paper}>
+
+                        <Typography component="h2" variant="h5" color="primary" gutterBottom>
+                            Director
+                        </Typography>
+                        {(hospitals.selectedHospital === '') ?
+                            "select a hospital" :
+                            <PersonDetailsCard person={hospitals.selectedHospital.director}/>
+                        }
+
                     </Paper>
                 </Grid>
             </Grid>

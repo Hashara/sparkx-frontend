@@ -34,8 +34,10 @@ const CalenderComponent = ({home, selectDateAction, fetchCovidStats, isStatic}) 
                     autoOk
                     variant="inline"
                     inputVariant="outlined"
-                    label="With keyboard"
-                    format="MM/dd/yyyy"
+                    label="Date"
+                    margin="dense"
+                    format="dd/MM/yyyy"
+                    disableFuture={true}
                     value={date}
                     InputAdornmentProps={{ position: "start" }}
                     onChange={val => {
