@@ -4,8 +4,6 @@ import {connect} from "react-redux";
 
 
 const PrivateRoute = ({component: Component,roles:roles, auth, ...rest}) => {
-    console.log( )
-    console.log(auth.currentUser.currentUser.person.role)
     return (
 
         <Route render={props => (

@@ -1,15 +1,19 @@
 import produce from "immer";
 
 import {
-    FETCH_HOSPITAL_REQUEST ,
-    FETCH_HOSPITAL_SUCCESS ,
-    FETCH_HOSPITAL_FAILURE
+    FETCH_HOSPITAL_REQUEST,
+    FETCH_HOSPITAL_SUCCESS,
+    FETCH_HOSPITAL_FAILURE,
+    FETCH_HOSPITAL_BY_ID_REQUEST,
+    FETCH_HOSPITAL_BY_ID_SUCCESS,
+    FETCH_HOSPITAL_BY_ID_FAILURE
 } from '../actions/hospitalActionTypes';
 
 const initialState = {
     loading: false,
     hospitals: [],
-    error: ''
+    error: '',
+    selectedHospital: '',
 }
 
 export default function hospitalReducer(state = initialState, action) {
@@ -26,6 +30,19 @@ export default function hospitalReducer(state = initialState, action) {
             case FETCH_HOSPITAL_FAILURE:
                 draft.loading = false;
                 draft.hospitals = [];
+                draft.error = action.payload;
+                break;
+            case FETCH_HOSPITAL_BY_ID_REQUEST:
+                draft.loading = true;
+                break;
+            case FETCH_HOSPITAL_BY_ID_SUCCESS:
+                draft.loading = false;
+                draft.selectedHospital = action.payload;
+                draft.error = '';
+                break;
+            case FETCH_HOSPITAL_BY_ID_FAILURE:
+                draft.loading = false;
+                draft.selectedHospital = '';
                 draft.error = action.payload;
                 break;
             default:

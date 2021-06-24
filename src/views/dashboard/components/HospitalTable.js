@@ -1,21 +1,24 @@
 import React, {useEffect} from "react";
 import TableComponent from "../components/Table";
-import {fetchHospitals} from "../../../redux";
+import {fetchHospitalById, fetchHospitals} from "../../../redux";
 
 import {connect} from "react-redux";
 
-const HospitalTable = ({hospitals, fetchHospitals}) => {
+
+const HospitalTable = ({hospitals, fetchHospitals, fetchHospitalById }) => {
     useEffect(() => {
         fetchHospitals()
     }, [])
 
+    const onSubmit = (hospitalId) => {
+        fetchHospitalById(hospitalId)
+    }
+
     const columns = ["hospitalId", "name", "district", "location_x", "location_y"]
 
-    // console.log(hospitals.hospitals)
     return (
-        // <p>Hello</p>
-        <TableComponent rows={hospitals.hospitals} columns={columns} excludes={["hospitalId"]} key={"hospitalId"}
-                        title={"Hospital"}/>
+        <TableComponent rows={hospitals.hospitals} columns={columns} excludes={["hospitalId"]} id={["hospitalId"]}
+                        title={"Hospital"} onSubmit={onSubmit} ButtonText = {"View More"}/>
 
     )
 }
@@ -28,9 +31,11 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        fetchHospitals: () => dispatch(fetchHospitals())
+        fetchHospitals: () => dispatch(fetchHospitals()),
+        fetchHospitalById: (hospitalId) => dispatch(fetchHospitalById(hospitalId))
     }
 }
+
 export default connect(
     mapStateToProps,
     mapDispatchToProps

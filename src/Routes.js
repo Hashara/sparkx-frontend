@@ -6,6 +6,8 @@ import Register from "./views/Auth/pages/Register";
 import SignUp from "./views/Auth/pages/SignUp";
 import PrivateRoute from "./router/PrivateRoute";
 import MoHDashboard from "./views/dashboard/pages/MoHDashboard";
+import PatientStats from "./views/dashboard/pages/PatientStats";
+import HospitalDetails from "./views/dashboard/pages/HospitalDetails";
 
 const Routes = () =>{
     return(
@@ -16,6 +18,9 @@ const Routes = () =>{
                 <Route path= "/register" exact component={Register} />
                 <Route path= "/signup" exact component={SignUp} />
                 <PrivateRoute path="/dashboard" exact component={MoHDashboard} roles={["MoH"]}/>
+                <PrivateRoute path="/stats" exact component={PatientStats} roles={["MoH","Patient","Doctor", "Director"]}/>
+                <PrivateRoute path="/hospital" exact component={HospitalDetails} roles={["MoH"]}/>
+
             </Switch>
         </BrowserRouter>
     )
