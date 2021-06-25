@@ -63,3 +63,11 @@ code {
   -webkit-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
 }
+
+.smallest-logo {
+  max-width: 10%;
+  height: auto;
+  display: block;
+  alignment: left;
+  margin-right: 30px;
+}
