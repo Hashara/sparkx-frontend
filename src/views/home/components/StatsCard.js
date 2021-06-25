@@ -42,6 +42,7 @@ const StatsCard = ({home, selectLevelAction, fetchCovidStats}) => {
     const classes = useStyles();
 
     useEffect(() => {
+        selectLevelAction('OVERALL')
         fetchCovidStats()
     }, [])
 

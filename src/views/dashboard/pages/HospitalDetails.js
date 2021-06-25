@@ -48,8 +48,11 @@ const HospitalDetails = ({
     const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
 
     useEffect(() => {
+        fetchHospitalById('')
         fetchHospitals()
         selectLevelAction('HOSPITAL')
+        selectHospitalAction('')
+        fetchCovidStats(home);
     }, [])
 
     const [hospitalVal, setHospitalVal] = React.useState();

@@ -8,7 +8,7 @@ import {Formik} from "formik";
 import TextField from "@material-ui/core/TextField";
 import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
-import {fetchDistricts, fetchHospitals, fetchRoleTypes, patientRegister, personRegister} from "../../../redux";
+import {fetchDistricts, newHospitalRegister, patientRegister} from "../../../redux";
 import {connect} from "react-redux";
 import Dashboard from "../components/Dashboard";
 import * as Yup from 'yup';
@@ -17,7 +17,6 @@ import InputLabel from "@material-ui/core/InputLabel";
 import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
 import QueueCard from "../components/QueueCard";
-import Paper from "@material-ui/core/Paper";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -79,7 +78,7 @@ const validationSchema = Yup.object().shape({
 })
 
 
-const SignUp = ({districts, fetchDistricts}) => {
+const SignUp = ({districts, fetchDistricts, newHospitalRegister}) => {
     const classes = useStyles();
 
     useEffect(() => {
@@ -87,8 +86,7 @@ const SignUp = ({districts, fetchDistricts}) => {
     }, [])
 
     const onSubmit = values => {
-        // personRegister(values)
-        console.log({
+        newHospitalRegister({
             hospital: {
                 name: values.name,
                 district: values.district,
@@ -117,28 +115,12 @@ const SignUp = ({districts, fetchDistricts}) => {
                             </Typography>
 
 
-
                             <Formik
                                 initialValues={initialValues}
                                 onSubmit={onSubmit}
                                 validationSchema={validationSchema}>
 
                                 {formik => {
-                                    console.log({
-                                        hospital: {
-                                            name: formik.values.name,
-                                            district: formik.values.district,
-                                            location_x: formik.values.location_x,
-                                            location_y: formik.values.location_y,
-                                        },
-                                        director: {
-                                            first_name: formik.values.first_name,
-                                            last_name: formik.values.last_name,
-                                            email: formik.values.email,
-                                            password: formik.values.password,
-                                        }
-                                    })
-
                                     return (
                                         <form className={classes.form} onSubmit={formik.handleSubmit}>
                                             <Divider/>
@@ -339,7 +321,7 @@ const SignUp = ({districts, fetchDistricts}) => {
                                                     color="primary"
                                                     className={classes.submit}
                                                 >
-                                                    Sign Up
+                                                    Submit
                                                 </Button>
                                             </Grid>
                                         </form>
@@ -364,7 +346,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         fetchDistricts: () => dispatch(fetchDistricts()),
-        patientRegister: (values) => dispatch(patientRegister(values))
+        patientRegister: (values) => dispatch(patientRegister(values)),
+        newHospitalRegister: (values) => dispatch(newHospitalRegister(values)),
     }
 }
 
