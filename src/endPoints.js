@@ -11,6 +11,8 @@ export const GET_QUEUE_DETAILS = BACKEND + "moh?cmd=QUEUE_DETAILS";
 
 export const GET_COVID_STATS = BACKEND + "public?cmd=GET_STATUS";
 
+export const GET_ACTIVE_RECORD = BACKEND + "patient?cmd=GET_ACTIVE_RECORD";
+
 export const POST_LOGIN_USER = BACKEND + "public?cmd=LOGIN";
 export const POST_REGISTER_PATIENT = BACKEND + "public?cmd=PATIENT_REGISTER";
 export const POST_REGISTER_PERSON = BACKEND + "public?cmd=REGISTER";

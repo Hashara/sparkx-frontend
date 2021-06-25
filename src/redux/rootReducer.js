@@ -6,6 +6,7 @@ import AuthReducer from "../views/Auth/redux/reducer/AuthReducer";
 import roleTypeReducer from "../views/Auth/redux/reducer/RoleReducer";
 import queueReducer from "../views/dashboard/redux/reducer/queueReducer";
 import newHospitalReducer from "../views/dashboard/redux/reducer/NewHospitalReducer";
+import activeRecordReducer from "../views/dashboard/redux/reducer/ActiveRecordReducer";
 
 const rootReducer = combineReducers({
     home: homeReducer,
@@ -15,6 +16,7 @@ const rootReducer = combineReducers({
     roleTypes: roleTypeReducer,
     queue: queueReducer,
     newHospital: newHospitalReducer,
+    activeRecord: activeRecordReducer,
 });
 
 export default rootReducer;
