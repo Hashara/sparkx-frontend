@@ -16,6 +16,8 @@ import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
 import {fetchHospitals, fetchRoleTypes, personRegister} from "../../../redux";
 import {connect} from "react-redux";
+import Alert from "@material-ui/lab/Alert";
+import {useHistory} from "react-router";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -68,15 +70,15 @@ const validationSchema = Yup.object({
 })
 
 
-
-
-const SignUp = ({fetchHospitals, hospitals, fetchRoleTypes, roleTypes, personRegister}) => {
+const SignUp = ({fetchHospitals, hospitals, fetchRoleTypes, roleTypes, personRegister, auth}) => {
     const classes = useStyles();
 
     useEffect(() => {
         fetchHospitals();
         fetchRoleTypes();
     }, [])
+
+    const history = useHistory();
 
     const onSubmit = values => {
         personRegister(values)
@@ -92,7 +94,15 @@ const SignUp = ({fetchHospitals, hospitals, fetchRoleTypes, roleTypes, personReg
                             <Typography component="h1" variant="h5">
                                 Create your NCMS Account
                             </Typography>
-
+                            {auth.error ?
+                                <Alert severity="error">
+                                    Form error
+                                </Alert> :
+                                auth.currentUser !== "initial" ?
+                                <Alert severity="success">
+                                    Registered successfully, login to continue
+                                    {/*{history.push("/signin")}*/}
+                                </Alert>: null}
 
                             <Formik
                                 initialValues={initialValues}
@@ -193,6 +203,7 @@ const SignUp = ({fetchHospitals, hospitals, fetchRoleTypes, roleTypes, personReg
                                                             variant="outlined"
                                                             className={classes.formControl}
                                                             margin="dense"
+                                                            fullWidth
                                                         >
                                                             <InputLabel
                                                                 htmlFor="outlined-age-native-simple">
@@ -208,37 +219,40 @@ const SignUp = ({fetchHospitals, hospitals, fetchRoleTypes, roleTypes, personReg
                                                                 helperText={formik.touched.role && formik.errors.role}
                                                             >
                                                                 {roleTypes.roleTypes.map(role => {
-                                                                    return <MenuItem value={role}>{role}</MenuItem>
+                                                                    if (role !== "Patient"){
+                                                                        return <MenuItem value={role}>{role}</MenuItem>
+                                                                    }
                                                                 })}
                                                             </Select>
                                                         </FormControl>
                                                     </Box>
                                                 </Grid>
                                                 <Grid item xs={6}>
-                                                        <FormControl
-                                                            variant="outlined"
-                                                            className={classes.formControl}
-                                                            margin="dense"
-                                                            fullWidth
+                                                    <FormControl
+                                                        variant="outlined"
+                                                        className={classes.formControl}
+                                                        margin="dense"
+                                                        fullWidth
+                                                    >
+                                                        <InputLabel
+                                                            htmlFor="outlined-age-native-simple">
+                                                            Hospital
+                                                        </InputLabel>
+                                                        <Select
+                                                            name="hospitalId"
+                                                            id="hospitalId"
+                                                            value={formik.values.hospitalId}
+                                                            onChange={formik.handleChange}
+                                                            onBlur={formik.handleBlur}
+                                                            error={formik.touched.hospitalId && Boolean(formik.errors.hospitalId)}
+                                                            helperText={formik.touched.hospitalId && formik.errors.hospitalId}
                                                         >
-                                                            <InputLabel
-                                                                htmlFor="outlined-age-native-simple">
-                                                                Hospital
-                                                            </InputLabel>
-                                                            <Select
-                                                                name="hospitalId"
-                                                                id="hospitalId"
-                                                                value={formik.values.hospitalId}
-                                                                onChange={formik.handleChange}
-                                                                onBlur={formik.handleBlur}
-                                                                error={formik.touched.hospitalId && Boolean(formik.errors.hospitalId)}
-                                                                helperText={formik.touched.hospitalId && formik.errors.hospitalId}
-                                                            >
-                                                                {hospitals.hospitals.map(hospital => {
-                                                                    return <MenuItem value={hospital.hospitalId}>{hospital.name} - {hospital.district}</MenuItem>
-                                                                })}
-                                                            </Select>
-                                                        </FormControl>
+                                                            {hospitals.hospitals.map(hospital => {
+                                                                return <MenuItem
+                                                                    value={hospital.hospitalId}>{hospital.name} - {hospital.district}</MenuItem>
+                                                            })}
+                                                        </Select>
+                                                    </FormControl>
                                                 </Grid>
                                             </Grid>
                                             <Grid container justify="center" p={10}>
@@ -272,6 +286,7 @@ const mapStateToProps = state => {
     return {
         hospitals: state.hospitals,
         roleTypes: state.roleTypes,
+        auth: state.auth,
     }
 }
 

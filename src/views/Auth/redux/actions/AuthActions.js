@@ -128,5 +128,10 @@ export const personRegister = (values) => {
     }
 }
 
+export const logOut= () => {
+    localStorage.clear();
+    window.location.href = '/';
+}
+
 
 

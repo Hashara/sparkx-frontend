@@ -15,7 +15,8 @@ import Grid from '@material-ui/core/Grid';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
-import MenuListItem from "./MenuListItems";
+import {logOut} from "../../Auth/redux/actions/AuthActions";
+import MenuListItems from "./MenuListItems";
 
 
 const drawerWidth = 240;
@@ -129,7 +130,7 @@ const Dashboard = ({children}) => {
                     </Typography>
                     <IconButton color="inherit">
                         <Badge color="secondary">
-                            <ExitToAppIcon/>
+                            <ExitToAppIcon button onClick={logOut}/>
                         </Badge>
                     </IconButton>
                 </Toolbar>
@@ -148,7 +149,7 @@ const Dashboard = ({children}) => {
                 </div>
                 <Divider/>
                 <List>
-                    <MenuListItem/>
+                    <MenuListItems/>
                 </List>
                 <Divider/>
                 {/*<List>{secondaryListItems}</List>*/}

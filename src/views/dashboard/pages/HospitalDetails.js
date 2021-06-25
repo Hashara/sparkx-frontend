@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, {useEffect, useState, Fragment} from "react";
 import Dashboard from "../components/Dashboard";
 import {Grid, Typography} from "@material-ui/core";
 import HospitalBedChart from "../components/HospitalBedChart";
@@ -41,21 +41,24 @@ const HospitalDetails = ({
                              fetchHospitalById,
                              selectHospitalAction,
                              fetchCovidStats,
-                             selectLevelAction
+                             selectLevelAction,
+                             id
                          }) => {
     const classes = useStyles();
 
     const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
 
+
+    const [hospitalVal, setHospitalVal] = useState(home.hospital);
+
     useEffect(() => {
-        fetchHospitalById('')
+        fetchHospitalById(hospitalVal)
         fetchHospitals()
         selectLevelAction('HOSPITAL')
-        selectHospitalAction('')
+        selectHospitalAction(hospitalVal)
         fetchCovidStats(home);
     }, [])
 
-    const [hospitalVal, setHospitalVal] = React.useState();
 
     const handleChange = (event) => {
         setHospitalVal(event.target.value);
@@ -67,7 +70,7 @@ const HospitalDetails = ({
     return (
         <Dashboard>
 
-
+            {console.log(hospitalVal)}
             <Grid item xs={12} md={8} lg={9}>
                 <Typography component="h3" variant="h3">
                     {(hospitals.selectedHospital === '') ?
@@ -77,12 +80,17 @@ const HospitalDetails = ({
                 </Typography>
             </Grid>
             <Grid item xs={12} md={4} lg={3}>
-                <FormControl variant="outlined" className={classes.formControl}>
+                <FormControl
+                    variant="outlined"
+                    className={classes.formControl}
+                    fullWidth
+                >
                     <InputLabel htmlFor="outlined-age-native-simple">Hospitals</InputLabel>
                     <Select
                         value={hospitalVal}
                         onChange={handleChange}
                         label={hospitalVal}
+
                     >
                         {hospitals.hospitals.map(hospital => {
                             return <MenuItem
@@ -92,48 +100,51 @@ const HospitalDetails = ({
                 </FormControl>
             </Grid>
             <Grid container>
-                    <Grid item xs={12} md={4} lg={3}>
-                        <Paper className={fixedHeightPaper}>
-                            {(hospitals.selectedHospital === '') ?
-                                null : <HospitalBedChart bedData={hospitals.selectedHospital.beds}/>
-                            }
-                        </Paper>
-                    </Grid>
+                <Grid item xs={12} md={4} lg={3}>
+                    <Paper className={fixedHeightPaper}>
+                        {(hospitals.selectedHospital === '') ?
+                            null : <HospitalBedChart bedData={hospitals.selectedHospital.beds}/>
+                        }
+                    </Paper>
+                </Grid>
 
 
                 <Grid item xs={12} md={4} lg={3}>
-                <Paper className={fixedHeightPaper}>
-
-                            <Typography component="h2" variant="h5" color="primary" gutterBottom>
-                                Covid 19 statistic
-                            </Typography>
-                            {/*{(hospitals.selectedHospital === '') ?*/}
-                            {/*    "select a hospital" :*/}
-                            {/*    <PersonDetailsCard person={hospitals.selectedHospital.director}/>*/}
-                            {/*}*/}
-                            <Grid item xs={12} md={12} lg={9}>
-                            <CalenderComponent isStatic={false}/>
-                        </Grid>
-                        <Grid container>
-                            <Grid item xs={12} md={12} lg={12}>
-                                <StatsChart stats={home.stats.covidStats}/>
-                            </Grid>
-                        </Grid>
+                    <Paper className={fixedHeightPaper}>
+                        {(hospitals.selectedHospital === '') ?
+                            null :
+                            <Fragment>
+                                <Typography component="h2" variant="h5" color="primary" gutterBottom>
+                                    Covid 19 statistic
+                                </Typography>
+                                <Grid item xs={12} md={12} lg={9}>
+                                    <CalenderComponent isStatic={false}/>
+                                </Grid>
+                                <Grid container>
+                                    <Grid item xs={12} md={12} lg={12}>
+                                        <StatsChart stats={home.stats.covidStats}/>
+                                    </Grid>
+                                </Grid>
+                            </Fragment>
+                        }
 
                     </Paper>
                 </Grid>
 
                 <Grid item xs={12} md={8} lg={6}>
                     <Paper className={classes.paper}>
-
-                        <Typography component="h2" variant="h5" color="primary" gutterBottom>
-                            Director
-                        </Typography>
                         {(hospitals.selectedHospital === '') ?
-                            "select a hospital" :
-                            <PersonDetailsCard person={hospitals.selectedHospital.director}/>
+                            null :
+                            <Fragment>
+                                <Typography component="h2" variant="h5" color="primary" gutterBottom>
+                                    Director
+                                </Typography>
+                                {(hospitals.selectedHospital === '') ?
+                                    "select a hospital" :
+                                    <PersonDetailsCard person={hospitals.selectedHospital.director}/>
+                                }
+                            </Fragment>
                         }
-
                     </Paper>
                 </Grid>
             </Grid>

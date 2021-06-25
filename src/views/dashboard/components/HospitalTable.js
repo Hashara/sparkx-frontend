@@ -1,17 +1,23 @@
 import React, {useEffect} from "react";
 import TableComponent from "../components/Table";
-import {fetchHospitalById, fetchHospitals} from "../../../redux";
+import {fetchHospitalById, fetchHospitals, selectHospitalAction} from "../../../redux";
 
 import {connect} from "react-redux";
+import { withRouter, useHistory } from "react-router-dom";
 
 
-const HospitalTable = ({hospitals, fetchHospitals, fetchHospitalById }) => {
+const HospitalTable = ({hospitals, fetchHospitals, fetchHospitalById,selectHospitalAction }) => {
     useEffect(() => {
         fetchHospitals()
     }, [])
 
+    const history = useHistory();
+
     const onSubmit = (hospitalId) => {
         fetchHospitalById(hospitalId)
+        selectHospitalAction(hospitalId)
+        history.push("/hospital")
+
     }
 
     const columns = ["hospitalId", "name", "district", "location_x", "location_y"]
@@ -32,11 +38,13 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         fetchHospitals: () => dispatch(fetchHospitals()),
-        fetchHospitalById: (hospitalId) => dispatch(fetchHospitalById(hospitalId))
+        fetchHospitalById: (hospitalId) => dispatch(fetchHospitalById(hospitalId)),
+        selectHospitalAction: (hospital) => dispatch(selectHospitalAction(hospital)),
+
     }
 }
 
-export default connect(
+export default withRouter(connect(
     mapStateToProps,
     mapDispatchToProps
-)(HospitalTable);
+)(HospitalTable));

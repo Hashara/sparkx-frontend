@@ -16,6 +16,8 @@ import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import {connect} from "react-redux";
 import {Link} from "react-router-dom";
 import Button from "@material-ui/core/Button";
+import {logOut} from "../../Auth/redux/actions/AuthActions";
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 
 // export const mainListItems = (
 //     <div>
@@ -90,7 +92,7 @@ const MoHListItems = () => (
             </ListItemIcon>
             <ListItemText primary="Hospitals"/>
         </ListItem>
-        <ListItem button component={Link} to="new-hospital">
+        <ListItem button component={Link} to="/new-hospital">
             <ListItemIcon>
                 <FiberNewIcon/>
             </ListItemIcon>
@@ -102,7 +104,7 @@ const MoHListItems = () => (
             </ListItemIcon>
             <ListItemText primary="Statistics"/>
         </ListItem>
-        <ListItem button>
+        <ListItem button onClick={logOut}>
             <ListItemIcon>
                 <ExitToAppIcon/>
             </ListItemIcon>
@@ -111,11 +113,44 @@ const MoHListItems = () => (
     </div>
 );
 
+const PatientListItems = () => (
+    <div>
+        <ListItem button>
+            <ListItemIcon>
+                <AssignmentIcon/>
+            </ListItemIcon>
+            <ListItemText primary="Reports"/>
+        </ListItem>
+        <ListItem button component={Link} to="/stats">
+            <ListItemIcon>
+                <EqualizerIcon/>
+            </ListItemIcon>
+            <ListItemText primary="Statistics"/>
+        </ListItem>
+        <ListItem button >
+            <ListItemIcon>
+                <AccountCircleIcon/>
+            </ListItemIcon>
+            <ListItemText primary="details"/>
+        </ListItem>
+        <ListItem button onClick={logOut}>
+            <ListItemIcon>
+                <ExitToAppIcon/>
+            </ListItemIcon>
+            <ListItemText primary="Logout"/>
+        </ListItem>
+    </div>
+);
+
+
 const MenuListItems = ({auth}) => {
-    // console.log(auth.currentUser.currentUser.person.role)
+    console.log(auth.currentUser.currentUser.person.role)
     return (
         (auth.currentUser.currentUser.person.role === "MoH") ?
-            <MoHListItems/> :null
+            <MoHListItems/> :
+            (auth.currentUser.currentUser.person.role === "Patient") ?
+            <PatientListItems/>:
+            null
 
     )
 }

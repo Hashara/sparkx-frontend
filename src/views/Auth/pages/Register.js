@@ -16,6 +16,8 @@ import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
 import { fetchDistricts, patientRegister } from "../../../redux";
 import {connect} from "react-redux";
+import Alert from "@material-ui/lab/Alert";
+import {useHistory} from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -80,7 +82,7 @@ const validationSchema = Yup.object({
 
 
 
-const Register = ({districts, fetchDistricts, patientRegister}) => {
+const Register = ({districts, auth, fetchDistricts, patientRegister}) => {
     const classes = useStyles();
 
     useEffect(() => {
@@ -90,6 +92,9 @@ const Register = ({districts, fetchDistricts, patientRegister}) => {
     const onSubmit = values => {
         patientRegister(values)
     }
+
+    const history = useHistory();
+
 
     return (
         <Box p={1} bgcolor="background.paper" className='register'>
@@ -101,6 +106,15 @@ const Register = ({districts, fetchDistricts, patientRegister}) => {
                             <Typography component="h1" variant="h5">
                                 Create your NCMS Account
                             </Typography>
+                            {auth.error ?
+                                <Alert severity="error">
+                                    Form error
+                                </Alert> :
+                                auth.currentUser !== "initial" ?
+                                    <Alert severity="success">
+                                    Registered successfully, login to continue
+                                    {/*{history.push("/signin")}*/}
+                                </Alert>: null}
                             <Formik
                                 initialValues={initialValues}
                                 onSubmit={onSubmit}
@@ -354,6 +368,7 @@ const Register = ({districts, fetchDistricts, patientRegister}) => {
 const mapStateToProps = state => {
     return {
         districts: state.districts,
+        auth: state.auth
     }
 }
 
