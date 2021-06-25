@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Link from '@material-ui/core/Link';
@@ -14,6 +14,7 @@ import {login} from "../../../redux";
 import {connect} from 'react-redux';
 import Alert from '@material-ui/lab/Alert';
 import logo from "../../../asserts/logo.png";
+import {useHistory} from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -52,11 +53,20 @@ const validationSchema = Yup.object({
 
 const SignIn = ({auth, login}) => {
     const classes = useStyles();
+    const history = useHistory();
 
     const onSubmit = values => {
         login(values.email, values.password)
+        if (auth.loggedIn  && !auth.newUser  ) {
+            history.push("/dashboard")
+        }
     }
 
+    useEffect(() => {
+        if (auth.loggedIn && !auth.newUser ) {
+            history.push("/dashboard")
+        }
+    },[])
     return (
         <Box p={1} bgcolor="background.paper" className='vertical-horizontal'>
             <Card container variant="outlined">

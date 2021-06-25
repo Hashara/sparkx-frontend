@@ -46,7 +46,7 @@ export default function AuthReducer(state = initialState, action) {
                 break;
             case PATIENT_REGISTER_SUCCESS:
                 draft.loading = false;
-                draft.loggedIn = true;
+                draft.loggedIn = false;
                 draft.currentUser = action.payload;
                 draft.error = null;
                 draft.newUser = true;
@@ -64,7 +64,7 @@ export default function AuthReducer(state = initialState, action) {
                 break;
             case PERSON_REGISTER_SUCCESS:
                 draft.loading = false;
-                draft.loggedIn = true;
+                draft.loggedIn = false;
                 draft.currentUser = action.payload;
                 draft.error = null;
                 draft.newUser = true;
