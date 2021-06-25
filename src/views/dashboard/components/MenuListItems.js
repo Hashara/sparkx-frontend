@@ -14,6 +14,8 @@ import FiberNewIcon from '@material-ui/icons/FiberNew';
 import EqualizerIcon from '@material-ui/icons/Equalizer';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import {connect} from "react-redux";
+import {Link} from "react-router-dom";
+import Button from "@material-ui/core/Button";
 
 // export const mainListItems = (
 //     <div>
@@ -76,25 +78,25 @@ import {connect} from "react-redux";
 
 const MoHListItems = () => (
     <div>
-        <ListItem button>
+        <ListItem button component={Link} to="/dashboard" >
             <ListItemIcon>
                 <DashboardIcon/>
             </ListItemIcon>
             <ListItemText primary="Dashboard"/>
         </ListItem>
-        <ListItem button>
+        <ListItem button component={Link} to="/hospital">
             <ListItemIcon>
                 < LocalHospitalIcon/>
             </ListItemIcon>
             <ListItemText primary="Hospitals"/>
         </ListItem>
-        <ListItem button>
+        <ListItem button component={Link} to="new-hospital">
             <ListItemIcon>
                 <FiberNewIcon/>
             </ListItemIcon>
             <ListItemText primary="New Hospital"/>
         </ListItem>
-        <ListItem button>
+        <ListItem button component={Link} to="/stats">
             <ListItemIcon>
                 <EqualizerIcon/>
             </ListItemIcon>

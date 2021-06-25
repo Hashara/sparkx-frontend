@@ -35,7 +35,7 @@ const MoHDashboard = () => {
                 </Grid>
                 <Grid item xs={12} md={4} lg={3}>
                     <Paper className={fixedHeightPaper}>
-                        <QueueCard/>
+                        <QueueCard isDashboard={true}/>
                     </Paper>
                 </Grid>
             </Dashboard>

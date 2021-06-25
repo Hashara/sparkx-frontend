@@ -8,6 +8,7 @@ import PrivateRoute from "./router/PrivateRoute";
 import MoHDashboard from "./views/dashboard/pages/MoHDashboard";
 import PatientStats from "./views/dashboard/pages/PatientStats";
 import HospitalDetails from "./views/dashboard/pages/HospitalDetails";
+import NewHospitalForm from "./views/dashboard/pages/NewHospitalForm";
 
 const Routes = () =>{
     return(
@@ -20,7 +21,7 @@ const Routes = () =>{
                 <PrivateRoute path="/dashboard" exact component={MoHDashboard} roles={["MoH"]}/>
                 <PrivateRoute path="/stats" exact component={PatientStats} roles={["MoH","Patient","Doctor", "Director"]}/>
                 <PrivateRoute path="/hospital" exact component={HospitalDetails} roles={["MoH"]}/>
-
+                <PrivateRoute path="/new-hospital" exact component={NewHospitalForm} roles={["MoH"]}/>
             </Switch>
         </BrowserRouter>
     )
