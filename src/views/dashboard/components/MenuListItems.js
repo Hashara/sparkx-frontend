@@ -90,7 +90,7 @@ const MoHListItems = () => (
             </ListItemIcon>
             <ListItemText primary="Hospitals"/>
         </ListItem>
-        <ListItem button component={Link} to="new-hospital">
+        <ListItem button component={Link} to="/new-hospital">
             <ListItemIcon>
                 <FiberNewIcon/>
             </ListItemIcon>
