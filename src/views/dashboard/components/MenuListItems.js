@@ -16,6 +16,7 @@ import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import {connect} from "react-redux";
 import {Link} from "react-router-dom";
 import Button from "@material-ui/core/Button";
+import {logOut} from "../../Auth/redux/actions/AuthActions";
 
 // export const mainListItems = (
 //     <div>
@@ -102,7 +103,7 @@ const MoHListItems = () => (
             </ListItemIcon>
             <ListItemText primary="Statistics"/>
         </ListItem>
-        <ListItem button>
+        <ListItem button onClick={logOut}>
             <ListItemIcon>
                 <ExitToAppIcon/>
             </ListItemIcon>

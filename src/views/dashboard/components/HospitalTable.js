@@ -3,8 +3,7 @@ import TableComponent from "../components/Table";
 import {fetchHospitalById, fetchHospitals, selectHospitalAction} from "../../../redux";
 
 import {connect} from "react-redux";
-import {Redirect, withRouter, useHistory } from "react-router-dom";
-import Link from "@material-ui/core/Link";
+import { withRouter, useHistory } from "react-router-dom";
 
 
 const HospitalTable = ({hospitals, fetchHospitals, fetchHospitalById,selectHospitalAction }) => {
