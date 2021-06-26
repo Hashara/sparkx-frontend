@@ -25,22 +25,18 @@ const useStyles = makeStyles((theme) => ({
 const PatientDetailsRecordPage = ({ activeRecord, patient}) => {
     const classes = useStyles();
 
-    // useEffect(() => {
-    //     fetchActiveRecords()
-    // }, [])
-
     return (
         <Dashboard>
             <Grid container>
-                <Grid item xs={6}>
-                    <Paper className={classes.paper}>
-                        <PatientDetails patient={patient.patient} />
-                    </Paper>
-                </Grid>
-                <Grid item xs={6}>
+                <Grid item xs={7}>
                     <Paper className={classes.paper}>
                         {(activeRecord.active_record !== "") ?
                             < RecordCard record={activeRecord.active_record}/> :null}
+                    </Paper>
+                </Grid>
+                <Grid item xs={5}>
+                    <Paper className={classes.paper}>
+                        <PatientDetails patient={patient.patient} />
                     </Paper>
                 </Grid>
             </Grid>

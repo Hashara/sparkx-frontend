@@ -3,6 +3,7 @@ import {Card, Divider, Grid} from "@material-ui/core";
 import logo from "../../../asserts/logo.png";
 import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
+import SeverityLevelCard from "./SeverityLevelCard";
 
 const RecordCard = ({record}) => {
     return (
@@ -52,15 +53,29 @@ const RecordCard = ({record}) => {
                                 &emsp; Location: &emsp;{"(" + record.hospital.location_x + "," + record.hospital.location_y + ")"}
                             </Typography>
                             <Typography component="p" variant="p">
-                                &emsp; Bed Number: &emsp;{ record.bedId }
+                                &emsp; Bed Number: &emsp;{record.bedId}
                             </Typography>
                             {record.admittedDate ?
-                            <Typography component="p" variant="p">
-                                &emsp; Admitted Date: &emsp;{ record.admittedDate }
-                            </Typography>: null}
+                                <Fragment>
+                                    <Typography component="p" variant="p">
+                                        &emsp; Admitted Date: &emsp;{record.admittedDate}
+                                    </Typography>
+                                    <br/>
+                                    <Divider/>
+                                    <Typography component="h7" variant="h7" color="primary">
+                                       Severity Level
+                                    </Typography>
+                                    {record.severityList.map(
+                                        severity => (
+                                            <SeverityLevelCard severityLevel={severity}/>
+                                        )
+                                    )}
+                                </Fragment>
+                                : null}
                         </Fragment>
 
                     }
+
 
                 </Box>
             </Card>
