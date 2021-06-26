@@ -13,6 +13,7 @@ export const GET_COVID_STATS = BACKEND + "public?cmd=GET_STATUS";
 
 export const GET_ACTIVE_RECORD = BACKEND + "patient?cmd=GET_ACTIVE_RECORD";
 export const GET_PATIENT_DETAILS = BACKEND + "patient?cmd=PATIENT_BY_ID";
+export const GET_PATIENT_OF_HOSPITAL = BACKEND + "patient?cmd=PATIENTS_BY_HOSPITAL";
 
 export const POST_LOGIN_USER = BACKEND + "public?cmd=LOGIN";
 export const POST_REGISTER_PATIENT = BACKEND + "public?cmd=PATIENT_REGISTER";

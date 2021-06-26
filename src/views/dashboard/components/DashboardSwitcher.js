@@ -2,6 +2,7 @@ import React from "react";
 import {connect} from "react-redux";
 import MoHDashboard from "../pages/MoHDashboard";
 import PatientDashboard from "../pages/PatientDashboard";
+import DirectorDashboard from "../pages/DirectorDashboard";
 
 const DashboardSwitcher = ({auth}) => {
     console.log(auth.currentUser.currentUser.person.role)
@@ -10,6 +11,8 @@ const DashboardSwitcher = ({auth}) => {
             <MoHDashboard/> :
             (auth.currentUser.currentUser.person.role === "Patient") ?
                 <PatientDashboard/>:
+                (auth.currentUser.currentUser.person.role === "Director") ?
+                    <DirectorDashboard/>:
                 null
     )
 }

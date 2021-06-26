@@ -142,6 +142,34 @@ const PatientListItems = () => (
     </div>
 );
 
+const DirectorListItems = () => (
+    <div>
+        <ListItem button component={Link} to="/dashboard" >
+            <ListItemIcon>
+                <DashboardIcon/>
+            </ListItemIcon>
+            <ListItemText primary="Dashboard"/>
+        </ListItem>
+        <ListItem button component={Link} to="/stats">
+            <ListItemIcon>
+                <EqualizerIcon/>
+            </ListItemIcon>
+            <ListItemText primary="Statistics"/>
+        </ListItem>
+        <ListItem button component={Link} to="/details">
+            <ListItemIcon>
+                <AccountCircleIcon/>
+            </ListItemIcon>
+            <ListItemText primary="details"/>
+        </ListItem>
+        <ListItem button onClick={logOut}>
+            <ListItemIcon>
+                <ExitToAppIcon/>
+            </ListItemIcon>
+            <ListItemText primary="Logout"/>
+        </ListItem>
+    </div>
+);
 
 const MenuListItems = ({auth}) => {
     console.log(auth.currentUser.currentUser.person.role)
@@ -150,6 +178,8 @@ const MenuListItems = ({auth}) => {
             <MoHListItems/> :
             (auth.currentUser.currentUser.person.role === "Patient") ?
             <PatientListItems/>:
+                (auth.currentUser.currentUser.person.role === "Director") ?
+                    <DirectorListItems/>:
             null
 
     )

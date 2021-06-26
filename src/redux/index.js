@@ -6,3 +6,4 @@ export * from  '../views/Auth/redux/actions/RoleActions';
 export * from '../views/dashboard/redux/actions/queueActions';
 export * from '../views/dashboard/redux/actions/NewHospitalActions';
 export * from '../views/dashboard/redux/actions/PatientDetailsActions';
+export * from '../views/dashboard/redux/actions/PatientsOfHospitalActions';
