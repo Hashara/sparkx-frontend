@@ -1,17 +1,10 @@
 import React, {useEffect} from "react";
 import Dashboard from "../components/Dashboard";
-import TableComponent from "../components/Table";
-import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 import {makeStyles} from "@material-ui/core/styles";
-import HospitalTable from "../components/HospitalTable";
-import clsx from "clsx";
-import QueueCard from "../components/QueueCard";
-import RecordCard from "../components/RecordCard";
-import {fetchQueues} from "../redux/actions/queueActions";
 import {connect} from "react-redux";
-import {fetchActiveRecords} from "../redux/actions/ActiveRecordActions";
-import StatsCard from "../../home/components/StatsCard";
+import {fetchPatientDetails} from "../../../redux";
+import PatientDetails from "../components/PatientDetails";
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -25,12 +18,12 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const PatientDashboard = ({fetchActiveRecords, activeRecord}) => {
+const PatientUserDetails = ({fetchPatientDetails, patient}) => {
     const classes = useStyles();
 
 
     useEffect(() => {
-        fetchActiveRecords()
+        fetchPatientDetails()
     }, [])
 
     return (
@@ -39,8 +32,8 @@ const PatientDashboard = ({fetchActiveRecords, activeRecord}) => {
                 <Grid item xs={1}>
                 </Grid>
                 <Grid item xs={10}>
-                    {(activeRecord.active_record !== "") ?
-                    < RecordCard record={activeRecord.active_record}/> :null}
+                    {(patient.patient !== "") ?
+                    < PatientDetails patient={patient.patient}/> :null}
                 </Grid>
                 <Grid item xs={1}>
                 </Grid>
@@ -51,17 +44,17 @@ const PatientDashboard = ({fetchActiveRecords, activeRecord}) => {
 
 const mapStateToProps = state => {
     return {
-        activeRecord: state.activeRecord,
+        patient: state.patient,
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
-        fetchActiveRecords: () => dispatch(fetchActiveRecords())
+        fetchPatientDetails: () => dispatch(fetchPatientDetails())
     }
 }
 
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(PatientDashboard);
+)(PatientUserDetails);

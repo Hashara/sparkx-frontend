@@ -115,7 +115,7 @@ const MoHListItems = () => (
 
 const PatientListItems = () => (
     <div>
-        <ListItem button>
+        <ListItem button component={Link} to="/dashboard">
             <ListItemIcon>
                 <AssignmentIcon/>
             </ListItemIcon>
@@ -127,7 +127,7 @@ const PatientListItems = () => (
             </ListItemIcon>
             <ListItemText primary="Statistics"/>
         </ListItem>
-        <ListItem button >
+        <ListItem button component={Link} to="/details">
             <ListItemIcon>
                 <AccountCircleIcon/>
             </ListItemIcon>
