@@ -6,7 +6,7 @@ export const GET_ALL_DISTRICTS = BACKEND + "public?cmd=GET_ALL_DISTRICTS";
 export const GET_ALL_HOSPITALS = BACKEND + "public?cmd=GET_ALL_HOSPITALS";
 export const GET_ALL_ROLE_TYPE = BACKEND + "public?cmd=GET_ALL_ROLE_TYPES";
 
-export const GET_HOSPITAL_BY_ID = BACKEND + "moh?cmd=HOSPITAL_BY_ID";
+export const GET_HOSPITAL_BY_ID = BACKEND + "person?cmd=HOSPITAL_BY_ID";
 export const GET_QUEUE_DETAILS = BACKEND + "moh?cmd=QUEUE_DETAILS";
 
 export const GET_COVID_STATS = BACKEND + "public?cmd=GET_STATUS";
