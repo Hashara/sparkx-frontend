@@ -1,8 +1,6 @@
-import React, {useEffect} from "react";
+import React from "react";
 import Dashboard from "../components/Dashboard";
 import {Grid} from "@material-ui/core";
-import {fetchPatientDetails} from "../../../redux";
-import {connect} from "react-redux";
 import PatientTable from "../components/PatientTable";
 import Paper from "@material-ui/core/Paper";
 import {makeStyles} from "@material-ui/core/styles";
@@ -20,12 +18,9 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-const PatientDetailsPage = ({patientId, fetchPatientDetails, patient}) => {
+const PatientDetailsPage = () => {
     const classes = useStyles();
 
-    useEffect(() => {
-        fetchPatientDetails(patientId)
-    }, [])
 
     return (
         <Dashboard>
@@ -40,19 +35,5 @@ const PatientDetailsPage = ({patientId, fetchPatientDetails, patient}) => {
     )
 }
 
-const mapStateToProps = state => {
-    return {
-        patient: state.patient,
-    }
-}
 
-const mapDispatchToProps = dispatch => {
-    return {
-        fetchPatientDetails: (patientId) => dispatch(fetchPatientDetails(patientId))
-    }
-}
-
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(PatientDetailsPage);
+export default PatientDetailsPage;

@@ -7,3 +7,4 @@ export * from '../views/dashboard/redux/actions/queueActions';
 export * from '../views/dashboard/redux/actions/NewHospitalActions';
 export * from '../views/dashboard/redux/actions/PatientDetailsActions';
 export * from '../views/dashboard/redux/actions/PatientsOfHospitalActions';
+export * from '../views/dashboard/redux/actions/ActiveRecordActions';
