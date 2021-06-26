@@ -8,3 +8,4 @@ export * from '../views/dashboard/redux/actions/NewHospitalActions';
 export * from '../views/dashboard/redux/actions/PatientDetailsActions';
 export * from '../views/dashboard/redux/actions/PatientsOfHospitalActions';
 export * from '../views/dashboard/redux/actions/ActiveRecordActions';
+export * from "../views/dashboard/redux/actions/SeverityTypesActions";

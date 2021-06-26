@@ -9,6 +9,7 @@ import newHospitalReducer from "../views/dashboard/redux/reducer/NewHospitalRedu
 import activeRecordReducer from "../views/dashboard/redux/reducer/ActiveRecordReducer";
 import patientReducer from "../views/dashboard/redux/reducer/PatientDetailsReducer";
 import patientsOfHospitalReducer from "../views/dashboard/redux/reducer/PatientsOfHospitalReducer";
+import severityTypeReducer from "../views/dashboard/redux/reducer/SeverityTypesReducer";
 
 const rootReducer = combineReducers({
     home: homeReducer,
@@ -21,6 +22,7 @@ const rootReducer = combineReducers({
     activeRecord: activeRecordReducer,
     patient: patientReducer,
     patientsOfHospital: patientsOfHospitalReducer,
+    severityTypes: severityTypeReducer,
 });
 
 export default rootReducer;

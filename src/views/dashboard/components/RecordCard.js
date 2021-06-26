@@ -4,10 +4,9 @@ import logo from "../../../asserts/logo.png";
 import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
 import SeverityLevelCard from "./SeverityLevelCard";
-import {fetchPatientDetails} from "../redux/actions/PatientDetailsActions";
 import {connect} from "react-redux";
 import Button from "@material-ui/core/Button";
-import FormDialog from "./SeverityDialog";
+import SeverityDialog from "./SeverityDialog";
 
 const RecordCard = ({record, auth}) => {
     return (
@@ -80,7 +79,7 @@ const RecordCard = ({record, auth}) => {
                                             {/*<Button  variant="contained" color="primary">*/}
                                             {/*    Mark severity*/}
                                             {/*</Button>*/}
-                                            <FormDialog/>
+                                            <SeverityDialog/>
                                         </Box>
                                         <Box m={2} pt={2.26}>
                                             <Button  variant="contained" color="primary">
