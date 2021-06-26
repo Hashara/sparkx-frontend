@@ -11,6 +11,7 @@ import RecordCard from "../components/RecordCard";
 import {fetchQueues} from "../redux/actions/queueActions";
 import {connect} from "react-redux";
 import {fetchActiveRecords} from "../redux/actions/ActiveRecordActions";
+import StatsCard from "../../home/components/StatsCard";
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -27,7 +28,6 @@ const useStyles = makeStyles((theme) => ({
 const PatientDashboard = ({fetchActiveRecords, activeRecord}) => {
     const classes = useStyles();
 
-    const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
 
     useEffect(() => {
         fetchActiveRecords()
@@ -35,7 +35,16 @@ const PatientDashboard = ({fetchActiveRecords, activeRecord}) => {
 
     return (
         <Dashboard>
-            <RecordCard record={activeRecord.active_record}/>
+            <Grid container>
+                <Grid item xs={1}>
+                </Grid>
+                <Grid item xs={10}>
+                    {(activeRecord.active_record !== "") ?
+                    < RecordCard record={activeRecord.active_record}/> :null}
+                </Grid>
+                <Grid item xs={1}>
+                </Grid>
+            </Grid>
         </Dashboard>
     )
 }
