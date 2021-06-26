@@ -4,8 +4,12 @@ import logo from "../../../asserts/logo.png";
 import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
 import SeverityLevelCard from "./SeverityLevelCard";
+import {fetchPatientDetails} from "../redux/actions/PatientDetailsActions";
+import {connect} from "react-redux";
+import Button from "@material-ui/core/Button";
+import FormDialog from "./SeverityDialog";
 
-const RecordCard = ({record}) => {
+const RecordCard = ({record, auth}) => {
     return (
         <Box p={1} bgcolor="background.paper">
             <Card container variant="outlined">
@@ -55,7 +59,7 @@ const RecordCard = ({record}) => {
                             <Typography component="p" variant="p">
                                 &emsp; Bed Number: &emsp;{record.bedId}
                             </Typography>
-                            {record.admittedDate ?
+                            {record.admittedDate && auth.currentUser.currentUser.person.role !=="Patient" ?
                                 <Fragment>
                                     <Typography component="p" variant="p">
                                         &emsp; Admitted Date: &emsp;{record.admittedDate}
@@ -70,8 +74,31 @@ const RecordCard = ({record}) => {
                                             <SeverityLevelCard severityLevel={severity}/>
                                         )
                                     )}
+                                    <Grid container justify="center" p={10}>
+
+                                        <Box m={2} pt={2.26}>
+                                            {/*<Button  variant="contained" color="primary">*/}
+                                            {/*    Mark severity*/}
+                                            {/*</Button>*/}
+                                            <FormDialog/>
+                                        </Box>
+                                        <Box m={2} pt={2.26}>
+                                            <Button  variant="contained" color="primary">
+                                                Discharge
+                                            </Button>
+                                        </Box>
+                                        <Box m={2} pt={2.26}>
+                                            <Button  variant="contained" color="primary">
+                                                Death
+                                            </Button>
+                                        </Box>
+                                    </Grid>
                                 </Fragment>
-                                : null}
+                                :  <Box m={2} pt={2.26}>
+                                    <Button  variant="contained" color="primary">
+                                        Admit
+                                    </Button>
+                                </Box>}
                         </Fragment>
 
                     }
@@ -82,5 +109,20 @@ const RecordCard = ({record}) => {
         </Box>
     )
 }
+const mapStateToProps = state => {
+    return {
+        auth: state.auth,
+    }
+}
 
-export default RecordCard;
+// const mapDispatchToProps = dispatch => {
+//     return {
+//         fetchPatientDetails: (patientId) => dispatch(fetchPatientDetails(patientId)),
+//         // fetchActiveRecords: (patientId) => dispatch(fetchActiveRecords(patientId)),
+//     }
+// }
+
+export default connect(
+    mapStateToProps,
+    null
+)(RecordCard);

@@ -8,6 +8,10 @@ import Paper from "@material-ui/core/Paper";
 import {makeStyles} from "@material-ui/core/styles";
 import PatientDetails from "../components/PatientDetails";
 import RecordCard from "../components/RecordCard";
+import Box from "@material-ui/core/Box";
+import Button from "@material-ui/core/Button";
+import {Link} from "react-router-dom";
+import Card from "@material-ui/core/Card";
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -37,6 +41,7 @@ const PatientDetailsRecordPage = ({ activeRecord, patient}) => {
                 <Grid item xs={5}>
                     <Paper className={classes.paper}>
                         <PatientDetails patient={patient.patient} />
+
                     </Paper>
                 </Grid>
             </Grid>
@@ -54,7 +59,6 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         fetchPatientDetails: (patientId) => dispatch(fetchPatientDetails(patientId)),
-        // fetchActiveRecords: (patientId) => dispatch(fetchActiveRecords(patientId)),
     }
 }
 
