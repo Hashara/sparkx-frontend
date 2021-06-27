@@ -11,6 +11,7 @@ import patientReducer from "../views/dashboard/redux/reducer/PatientDetailsReduc
 import patientsOfHospitalReducer from "../views/dashboard/redux/reducer/PatientsOfHospitalReducer";
 import severityTypeReducer from "../views/dashboard/redux/reducer/SeverityTypesReducer";
 import markSeverityLevelReducer from "../views/dashboard/redux/reducer/MarkSeverityReducer";
+import admitPatientReducer from "../views/dashboard/redux/reducer/AdmitPatientReducer";
 
 const rootReducer = combineReducers({
     home: homeReducer,
@@ -25,6 +26,7 @@ const rootReducer = combineReducers({
     patientsOfHospital: patientsOfHospitalReducer,
     severityTypes: severityTypeReducer,
     markSeverityLevel: markSeverityLevelReducer,
+    admitPatient: admitPatientReducer,
 });
 
 export default rootReducer;

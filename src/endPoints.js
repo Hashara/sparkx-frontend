@@ -22,3 +22,5 @@ export const POST_REGISTER_PERSON = BACKEND + "public?cmd=REGISTER";
 export const POST_NEW_HOSPITAL = BACKEND + "moh?cmd=ADD_HOSPITAL";
 
 export const POST_MARK_SEVERITY_LEVEL = BACKEND + "doctor?cmd=MARK_SEVERITY";
+
+export const PUT_ADMIT_PATIENT = BACKEND + "staff?cmd=UPDATE_ADMIT_DATE";
