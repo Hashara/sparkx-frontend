@@ -2,60 +2,6 @@ import React, {useState} from "react";
 import {Doughnut} from "react-chartjs-2";
 import Typography from "@material-ui/core/Typography";
 
-// const bedData = [
-//     {
-//         bedId: "1",
-//         hospitalId: "0a03ec4f-6afa-4dab-b08b-9f2521f23d45",
-//         status: "available",
-//     },
-//     {
-//         bedId: "2",
-//         hospitalId: "0a03ec4f-6afa-4dab-b08b-9f2521f23d45",
-//         status: "available",
-//     },
-//     {
-//         bedId: "3",
-//         hospitalId: "0a03ec4f-6afa-4dab-b08b-9f2521f23d45",
-//         status: "available",
-//     },
-//     {
-//         bedId: "4",
-//         hospitalId: "0a03ec4f-6afa-4dab-b08b-9f2521f23d45",
-//         status: "available",
-//     },
-//     {
-//         bedId: "5",
-//         hospitalId: "0a03ec4f-6afa-4dab-b08b-9f2521f23d45",
-//         status: "available",
-//     },
-//     {
-//         bedId: "6",
-//         hospitalId: "0a03ec4f-6afa-4dab-b08b-9f2521f23d45",
-//         status: "available",
-//     },
-//     {
-//         bedId: "7",
-//         hospitalId: "0a03ec4f-6afa-4dab-b08b-9f2521f23d45",
-//         status: "available",
-//     },
-//     {
-//         bedId: "8",
-//         hospitalId: "0a03ec4f-6afa-4dab-b08b-9f2521f23d45",
-//         status: "available",
-//     },
-//     {
-//         bedId: "9",
-//         hospitalId: "0a03ec4f-6afa-4dab-b08b-9f2521f23d45",
-//         status: "available",
-//     },
-//     {
-//         bedId: "10",
-//         hospitalId: "0a03ec4f-6afa-4dab-b08b-9f2521f23d45",
-//         status: "available",
-//     },
-// ];
-
-
 const HospitalBedChart = ({bedData}) => {
     const available = bedData.filter(bed => bed.status === 'available').length
     const unavailable = bedData.filter(bed => bed.status === 'unavailable').length

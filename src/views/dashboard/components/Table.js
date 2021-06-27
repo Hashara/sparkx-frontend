@@ -13,12 +13,12 @@ const TableComponent = ({title, rows, columns, excludes, id, onSubmit, ButtonTex
             <Typography component="h2" variant="h6" color="primary" gutterBottom>
                 {title}
             </Typography>
-            <Table size="small">
+            <Table stickyHeader size="small">
                 <TableHead>
                     <TableRow>
                         {columns.map((column) => (
                             (excludes.includes(column)) ?
-                                null : <TableCell>{column}</TableCell>
+                                null : <TableCell >{column}</TableCell>
                         ))}
                         <TableCell align="right">
                             Actions

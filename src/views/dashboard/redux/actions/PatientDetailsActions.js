@@ -29,17 +29,20 @@ export const fetchPatientDetailsFailure = (error) => {
     }
 }
 
-export const fetchPatientDetails = () => {
+export const fetchPatientDetails = (patientId) => {
     return (dispatch, getState) => {
         const state = getState()
 
+        if(state.auth.currentUser.currentUser.person.role ==="Patient"){
+            patientId = state.auth.currentUser.currentUser.person.userId
+        }
         dispatch(fetchPatientDetailsRequest)
         axios.get(GET_PATIENT_DETAILS, {
                 headers: {
                     'Authorization': 'Bearer ' + state.auth.currentUser.currentUser.jwt
                 },
                 params: {
-                    id: state.auth.currentUser.currentUser.person.userId,
+                    id: patientId,
                 }
             }
         )

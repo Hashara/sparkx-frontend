@@ -29,17 +29,20 @@ export const fetchActiveRecordFailure = (error) => {
     }
 }
 
-export const fetchActiveRecords = () => {
+export const fetchActiveRecords = (patientId) => {
     return (dispatch, getState) => {
         const state = getState()
 
+        if(state.auth.currentUser.currentUser.person.role ==="Patient"){
+            patientId = state.auth.currentUser.currentUser.person.userId
+        }
         dispatch(fetchActiveRecordRequest)
         axios.get(GET_ACTIVE_RECORD, {
                 headers: {
                     'Authorization': 'Bearer ' + state.auth.currentUser.currentUser.jwt
                 },
                 params: {
-                    id: state.auth.currentUser.currentUser.person.userId,
+                    id: patientId,
                 }
             }
         )

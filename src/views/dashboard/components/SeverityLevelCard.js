@@ -1,7 +1,5 @@
-import React from "react";
-import StatsCard from "../../home/components/StatsCard";
+import React, {Fragment} from "react";
 import {Grid} from "@material-ui/core";
-import logo from "../../../asserts/logo.png";
 import Typography from "@material-ui/core/Typography";
 
 const SeverityLevelCard = ({severityLevel}) => {
@@ -10,7 +8,12 @@ const SeverityLevelCard = ({severityLevel}) => {
             <Grid item xs={1}>
             </Grid>
             <Grid item xs={10}>
-                severity
+                <Typography component="p" variant="p">
+                    &emsp; markedDate: {severityLevel.markedDate}
+                </Typography>
+                <Typography component="p" variant="p">
+                    &emsp; Level: {severityLevel.level}
+                </Typography>
             </Grid>
             <Grid item xs={1}>
             </Grid>

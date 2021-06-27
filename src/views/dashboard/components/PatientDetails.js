@@ -20,25 +20,25 @@ const PatientDetails = ({patient}) => {
                     <br/>
                     <Divider/>
                     <br/>
-                    <Typography component="p" variant="h6">
+                    <Typography component="p" variant="p">
                         &emsp; Name: &emsp;{patient.first_name + " " + patient.last_name}
                     </Typography>
-                    <Typography component="p" variant="h6">
+                    <Typography component="p" variant="p">
                         &emsp; Email: &emsp;{patient.email}
                     </Typography>
-                    <Typography component="p" variant="h6">
+                    <Typography component="p" variant="p">
                         &emsp; Birth Date: &emsp;{patient.birthDate}
                     </Typography>
-                    <Typography component="p" variant="h6">
+                    <Typography component="p" variant="p">
                         &emsp; Contact: &emsp;{patient.contact}
                     </Typography>
-                    <Typography component="p" variant="h6">
+                    <Typography component="p" variant="p">
                         &emsp; Gender: &emsp;{patient.gender}
                     </Typography>
-                    <Typography component="p" variant="h6">
+                    <Typography component="p" variant="p">
                         &emsp; District: &emsp;{patient.district}
                     </Typography>
-                    <Typography component="p" variant="h6">
+                    <Typography component="p" variant="p">
                         &emsp; Location: &emsp;{"(" + patient.location_x + "," + patient.location_y + ")"}
                     </Typography>
                 </Box>

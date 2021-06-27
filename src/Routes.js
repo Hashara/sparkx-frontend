@@ -10,6 +10,8 @@ import HospitalDetails from "./views/dashboard/pages/HospitalDetails";
 import NewHospitalForm from "./views/dashboard/pages/NewHospitalForm";
 import DashboardSwitcher from "./views/dashboard/components/DashboardSwitcher";
 import PatientUserDetails from "./views/dashboard/pages/PatientUserDetails";
+import PatientDetailsPage from "./views/dashboard/pages/PatientDetailsPage";
+import PatientDetailsRecordPage from "./views/dashboard/pages/PatientDetailsRecordPage";
 
 const Routes = () =>{
     return(
@@ -24,6 +26,8 @@ const Routes = () =>{
                 <PrivateRoute path="/hospital" exact component={HospitalDetails} roles={["MoH"]}/>
                 <PrivateRoute path="/new-hospital" exact component={NewHospitalForm} roles={["MoH"]}/>
                 <PrivateRoute path="/details" exact component={PatientUserDetails} roles={["Patient","Doctor", "Director"]}/>
+                <PrivateRoute path="/patients" exact component={PatientDetailsPage} roles={["Doctor", "Director"]}/>
+                <PrivateRoute path="/patient-details" exact component={PatientDetailsRecordPage} roles={["Doctor", "Director"]}/>
 
             </Switch>
         </BrowserRouter>

@@ -8,6 +8,13 @@ import queueReducer from "../views/dashboard/redux/reducer/queueReducer";
 import newHospitalReducer from "../views/dashboard/redux/reducer/NewHospitalReducer";
 import activeRecordReducer from "../views/dashboard/redux/reducer/ActiveRecordReducer";
 import patientReducer from "../views/dashboard/redux/reducer/PatientDetailsReducer";
+import patientsOfHospitalReducer from "../views/dashboard/redux/reducer/PatientsOfHospitalReducer";
+import severityTypeReducer from "../views/dashboard/redux/reducer/SeverityTypesReducer";
+import markSeverityLevelReducer from "../views/dashboard/redux/reducer/MarkSeverityReducer";
+import admitPatientReducer from "../views/dashboard/redux/reducer/AdmitPatientReducer";
+import dischargePatientReducer from "../views/dashboard/redux/reducer/DischargePatientReducer";
+import {deathPatient} from "../views/dashboard/redux/actions/MarkDeathActions";
+import deathPatientReducer from "../views/dashboard/redux/reducer/MarkDeathRedicer";
 
 const rootReducer = combineReducers({
     home: homeReducer,
@@ -19,6 +26,12 @@ const rootReducer = combineReducers({
     newHospital: newHospitalReducer,
     activeRecord: activeRecordReducer,
     patient: patientReducer,
+    patientsOfHospital: patientsOfHospitalReducer,
+    severityTypes: severityTypeReducer,
+    markSeverityLevel: markSeverityLevelReducer,
+    admitPatient: admitPatientReducer,
+    dischargePatient: dischargePatientReducer,
+    deathPatient: deathPatientReducer,
 });
 
 export default rootReducer;
