@@ -7,14 +7,19 @@ import SeverityLevelCard from "./SeverityLevelCard";
 import {connect} from "react-redux";
 import Button from "@material-ui/core/Button";
 import SeverityDialog from "./SeverityDialog";
-import {putPatientAdmit} from  "../../../redux";
+import {putPatientAdmit, dischargePatient} from  "../../../redux";
 
 
 
-const RecordCard = ({record, auth, putPatientAdmit}) => {
+const RecordCard = ({record, auth, putPatientAdmit, dischargePatient}) => {
     const admit = (serialNumber) => {
         putPatientAdmit(serialNumber)
     }
+
+    const discharge = (serialNumber) => {
+        dischargePatient(serialNumber)
+    }
+
     return (
         <Box p={1} bgcolor="background.paper">
             <Card container variant="outlined">
@@ -88,7 +93,7 @@ const RecordCard = ({record, auth, putPatientAdmit}) => {
                                             <SeverityDialog/>
                                         </Box>
                                         <Box m={2} pt={2.26}>
-                                            <Button  variant="contained" color="primary">
+                                            <Button  variant="contained" color="primary" onClick={discharge(record.serialNumber)}>
                                                 Discharge
                                             </Button>
                                         </Box>
@@ -122,7 +127,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        putPatientAdmit: (serialNumber) => dispatch(putPatientAdmit(serialNumber))
+        putPatientAdmit: (serialNumber) => dispatch(putPatientAdmit(serialNumber)),
+        dischargePatient: (serialNumber) => dispatch(dischargePatient(serialNumber))
     }
 }
 
