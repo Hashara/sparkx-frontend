@@ -10,6 +10,7 @@ import activeRecordReducer from "../views/dashboard/redux/reducer/ActiveRecordRe
 import patientReducer from "../views/dashboard/redux/reducer/PatientDetailsReducer";
 import patientsOfHospitalReducer from "../views/dashboard/redux/reducer/PatientsOfHospitalReducer";
 import severityTypeReducer from "../views/dashboard/redux/reducer/SeverityTypesReducer";
+import markSeverityLevelReducer from "../views/dashboard/redux/reducer/MarkSeverityReducer";
 
 const rootReducer = combineReducers({
     home: homeReducer,
@@ -23,6 +24,7 @@ const rootReducer = combineReducers({
     patient: patientReducer,
     patientsOfHospital: patientsOfHospitalReducer,
     severityTypes: severityTypeReducer,
+    markSeverityLevel: markSeverityLevelReducer,
 });
 
 export default rootReducer;

@@ -6,7 +6,7 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import {fetchSeverityTypes} from "../../../redux";
+import {fetchSeverityTypes, markSeverityLevel} from "../../../redux";
 import {connect} from "react-redux";
 import FormControl from "@material-ui/core/FormControl";
 import InputLabel from "@material-ui/core/InputLabel";
@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const SeverityDialog = ({fetchSeverityTypes, severityTypes}) =>  {
+const SeverityDialog = ({fetchSeverityTypes, markSeverityLevel, severityTypes}) =>  {
     const classes = useStyles();
 
     const [open, setOpen] = React.useState(false);
@@ -40,11 +40,12 @@ const SeverityDialog = ({fetchSeverityTypes, severityTypes}) =>  {
     };
 
     const handleClose = () => {
+        markSeverityLevel(level)
         setOpen(false);
     };
 
     const handleChange = (event) => {
-        console.log(event.target.value)
+        setLevel(event.target.value)
     };
 
     return (
@@ -64,13 +65,12 @@ const SeverityDialog = ({fetchSeverityTypes, severityTypes}) =>  {
                             value={level}
                             onChange={handleChange}
                             label= {level}
-                            // disabled={true}
                         >
 
                             {
                                  (severityTypes.severityType !== "") ?
-                                severityTypes.severityType.map(dis => {
-                                return <MenuItem value={dis}>{dis}</MenuItem>
+                                severityTypes.severityType.map(severity => {
+                                return <MenuItem value={severity}>{severity}</MenuItem>
                             }): null
                             }
                         </Select>
@@ -97,7 +97,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        fetchSeverityTypes: () => dispatch(fetchSeverityTypes())
+        fetchSeverityTypes: () => dispatch(fetchSeverityTypes()),
+        markSeverityLevel: level => dispatch(markSeverityLevel(level))
     }
 }
 

@@ -20,3 +20,5 @@ export const POST_LOGIN_USER = BACKEND + "public?cmd=LOGIN";
 export const POST_REGISTER_PATIENT = BACKEND + "public?cmd=PATIENT_REGISTER";
 export const POST_REGISTER_PERSON = BACKEND + "public?cmd=REGISTER";
 export const POST_NEW_HOSPITAL = BACKEND + "moh?cmd=ADD_HOSPITAL";
+
+export const POST_MARK_SEVERITY_LEVEL = BACKEND + "doctor?cmd=MARK_SEVERITY";
