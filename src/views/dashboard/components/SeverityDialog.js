@@ -77,10 +77,10 @@ const SeverityDialog = ({fetchSeverityTypes, markSeverityLevel, severityTypes}) 
                     </FormControl>
                 </DialogContent>
                 <DialogActions>
-                    <Button onClick={handleClose} color="primary">
+                    <Button onClick={() => handleClose} color="primary">
                         Cancel
                     </Button>
-                    <Button onClick={handleClose} color="primary">
+                    <Button onClick={() => handleClose} color="primary">
                         OK
                     </Button>
                 </DialogActions>

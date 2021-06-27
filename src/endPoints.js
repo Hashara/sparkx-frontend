@@ -25,3 +25,4 @@ export const POST_MARK_SEVERITY_LEVEL = BACKEND + "doctor?cmd=MARK_SEVERITY";
 
 export const PUT_ADMIT_PATIENT = BACKEND + "staff?cmd=UPDATE_ADMIT_DATE";
 export const PUT_DISCHARGE_PATIENT = BACKEND + "director?cmd=DISCHARGE_PATIENT";
+export const PUT_DEATH_PATIENT = BACKEND + "doctor?cmd=MARK_DEATH";

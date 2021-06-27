@@ -12,3 +12,4 @@ export * from "../views/dashboard/redux/actions/SeverityTypesActions";
 export * from "../views/dashboard/redux/actions/MarkSeverityActions";
 export * from "../views/dashboard/redux/actions/AdmitPatientActions";
 export * from "../views/dashboard/redux/actions/DischargePatientActions";
+export * from "../views/dashboard/redux/actions/MarkDeathActions";

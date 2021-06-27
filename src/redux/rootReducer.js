@@ -13,6 +13,8 @@ import severityTypeReducer from "../views/dashboard/redux/reducer/SeverityTypesR
 import markSeverityLevelReducer from "../views/dashboard/redux/reducer/MarkSeverityReducer";
 import admitPatientReducer from "../views/dashboard/redux/reducer/AdmitPatientReducer";
 import dischargePatientReducer from "../views/dashboard/redux/reducer/DischargePatientReducer";
+import {deathPatient} from "../views/dashboard/redux/actions/MarkDeathActions";
+import deathPatientReducer from "../views/dashboard/redux/reducer/MarkDeathRedicer";
 
 const rootReducer = combineReducers({
     home: homeReducer,
@@ -29,6 +31,7 @@ const rootReducer = combineReducers({
     markSeverityLevel: markSeverityLevelReducer,
     admitPatient: admitPatientReducer,
     dischargePatient: dischargePatientReducer,
+    deathPatient: deathPatientReducer,
 });
 
 export default rootReducer;

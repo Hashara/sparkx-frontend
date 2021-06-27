@@ -35,7 +35,7 @@ const PatientDetailsRecordPage = ({ activeRecord, patient}) => {
                 <Grid item xs={7}>
                     <Paper className={classes.paper}>
                         {(activeRecord.active_record !== "") ?
-                            < RecordCard record={activeRecord.active_record}/> :null}
+                            < RecordCard record={activeRecord.active_record} patientId={patient.patient.patientId}/> :null}
                     </Paper>
                 </Grid>
                 <Grid item xs={5}>

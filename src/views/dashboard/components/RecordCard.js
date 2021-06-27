@@ -7,17 +7,21 @@ import SeverityLevelCard from "./SeverityLevelCard";
 import {connect} from "react-redux";
 import Button from "@material-ui/core/Button";
 import SeverityDialog from "./SeverityDialog";
-import {putPatientAdmit, dischargePatient} from  "../../../redux";
+import {putPatientAdmit, dischargePatient, deathPatient} from  "../../../redux";
 
 
 
-const RecordCard = ({record, auth, putPatientAdmit, dischargePatient}) => {
+const RecordCard = ({record, auth, putPatientAdmit, dischargePatient, deathPatient, patientId}) => {
     const admit = (serialNumber) => {
         putPatientAdmit(serialNumber)
     }
 
     const discharge = (serialNumber) => {
         dischargePatient(serialNumber)
+    }
+
+    const death = (patientId) => {
+        deathPatient(patientId)
     }
 
     return (
@@ -87,25 +91,22 @@ const RecordCard = ({record, auth, putPatientAdmit, dischargePatient}) => {
                                     <Grid container justify="center" p={10}>
 
                                         <Box m={2} pt={2.26}>
-                                            {/*<Button  variant="contained" color="primary">*/}
-                                            {/*    Mark severity*/}
-                                            {/*</Button>*/}
                                             <SeverityDialog/>
                                         </Box>
                                         <Box m={2} pt={2.26}>
-                                            <Button  variant="contained" color="primary" onClick={discharge(record.serialNumber)}>
+                                            <Button  variant="contained" color="primary" onClick={() => discharge(record.serialNumber)}>
                                                 Discharge
                                             </Button>
                                         </Box>
                                         <Box m={2} pt={2.26}>
-                                            <Button  variant="contained" color="primary">
+                                            <Button  variant="contained" color="primary" onClick={() => death(patientId)}>
                                                 Death
                                             </Button>
                                         </Box>
                                     </Grid>
                                 </Fragment>
                                 :  <Box m={2} pt={2.26}>
-                                    <Button  variant="contained" color="primary" onClick={admit(record.serialNumber)}>
+                                    <Button  variant="contained" color="primary" onClick={() => admit(record.serialNumber)}>
                                         Admit
                                     </Button>
                                 </Box>}
@@ -128,7 +129,9 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         putPatientAdmit: (serialNumber) => dispatch(putPatientAdmit(serialNumber)),
-        dischargePatient: (serialNumber) => dispatch(dischargePatient(serialNumber))
+        dischargePatient: (serialNumber) => dispatch(dischargePatient(serialNumber)),
+        deathPatient: (patientId) => dispatch(deathPatient(patientId))
+
     }
 }
 
